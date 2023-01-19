@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "757622546483",
+    "firebase_url": "https://gamepals-faffa-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "gamepals-faffa",
+    "storage_bucket": "gamepals-faffa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757622546483:android:198d03a9c3fbaae12f8346",
+        "android_client_info": {
+          "package_name": "com.example.gamepals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757622546483-4aso3b0okcbqbhh7sbv18t43s6dj2etg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3QBD0NZW7l8F6jSJYq2hDxuK35FyZhaQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757622546483-4aso3b0okcbqbhh7sbv18t43s6dj2etg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
