@@ -15,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "757622546483-4aso3b0okcbqbhh7sbv18t43s6dj2etg.apps.googleusercontent.com",
+          "client_id": "757622546483-8edcfk1tvghom1fjc32i53j27cnnhs0o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gamepals",
+            "certificate_hash": "39dbf93325d760a3929229c5179c76196d17ffaa"
+          }
+        },
+        {
+          "client_id": "757622546483-5pofhumrv929qr0csvotjnl11gq30473.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
