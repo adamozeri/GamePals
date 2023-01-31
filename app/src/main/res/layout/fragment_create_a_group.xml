@@ -6,31 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".ui.create_a_group.CreateAGroupFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/create_IMG_groupIMG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_launcher_background"
-        android:layout_marginTop="40dp"
+    <RelativeLayout
+        android:id="@+id/create_LL_imgName"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="20dp" >
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/create_IMG_groupIMG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_launcher_background"
+
+            />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/create_ET_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:hint="@string/name"
+            android:textAlignment="center"
+            android:textColorHint="@color/grey"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_alignBottom="@+id/create_IMG_groupIMG"
+            android:layout_toEndOf="@id/create_IMG_groupIMG"
+            />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/create_IMG_groupIMG">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_ET_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:hint="@string/name"
-            android:textAlignment="center"
-            android:textColorHint="@color/grey"
-            android:layout_marginTop="10dp"
-            />
+        android:layout_below="@+id/create_LL_imgName">
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/create_SP_region"
@@ -55,7 +65,26 @@
             android:layout_marginTop="10dp"
             android:entries="@array/Platform"
             android:dropDownWidth="250dp"
+            android:backgroundTintMode="multiply"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Capacity "
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:inputType="numberDecimal"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/create_TF_description"
@@ -74,21 +103,15 @@
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/create"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:icon="@drawable/ic_launcher_foreground"
+            app:iconSize="60dp"
+            app:iconGravity="textStart" />
 
     </LinearLayout>
 
-<!--    <TextView-->
-<!--        android:id="@+id/text_notifications"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
 </RelativeLayout>
