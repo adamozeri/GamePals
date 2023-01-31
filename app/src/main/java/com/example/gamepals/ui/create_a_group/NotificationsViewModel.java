@@ -1,4 +1,4 @@
-package com.example.gamepals.ui.notifications;
+package com.example.gamepals.ui.create_a_group;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
