@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/group_IMG_groupIMG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/group_TV_groupName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/group_IMG_groupIMG"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/group_IMG_groupIMG"
+            android:text="Name"
+            android:textSize="30sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/group_TV_groupDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/group_TV_groupName"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@+id/group_IMG_groupIMG"
+            android:text="Description"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/group_TV_groupDescription"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@+id/group_IMG_groupIMG"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/capacity"
+                    android:scaleType="centerCrop"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/group_TV_capacity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="5/10"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/globe"
+                    android:scaleType="centerCrop"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/group_TV_region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="Europe"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/skill"
+                    android:scaleType="centerCrop"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/group_TV_skill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="Beginner"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/group_IMG_platform"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/pc"
+                    android:scaleType="centerCrop"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/group_TV_platform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="PC"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
