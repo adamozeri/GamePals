@@ -16,6 +16,8 @@
     <string name="description">Description</string>
     <string name="create">Create Group</string>
     <string name="capacity">Capacity</string>
+    <string name="password">Password</string>
+    <string name="join">Join</string>
 
     <string-array name="Region">
         <item>Any</item>

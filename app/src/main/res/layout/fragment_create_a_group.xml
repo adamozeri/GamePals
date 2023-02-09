@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="50dp" >
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/create_IMG_groupIMG"
             android:layout_width="wrap_content"
@@ -75,6 +75,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/capacity"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:inputType="numberDecimal"
+                android:textSize="18sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
                 android:textSize="18sp"
                 android:textColor="@color/black"/>
             <com.google.android.material.textfield.TextInputEditText
