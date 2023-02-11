@@ -2,7 +2,7 @@
     <string name="app_name">GamePals</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_create_a_group">Notifications</string>
+    <string name="title_create_a_group">Create A Group</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -32,7 +32,7 @@
         <item>Any</item>
         <item>Beginner</item>
         <item>Experienced</item>
-        <item>Pro</item>
+        <item>Professional</item>
     </string-array>
     <string-array name="Platform">
         <item>Any</item>
