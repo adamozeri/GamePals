@@ -1,5 +1,7 @@
 package com.example.gamepals.ui.home;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gamepals.GroupRecyclerAdapter;
+import com.example.gamepals.LoginActivity;
+import com.example.gamepals.MainActivity;
 import com.example.gamepals.R;
 import com.example.gamepals.databinding.FragmentHomeBinding;
 import com.example.gamepals.model.Group;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -23,6 +29,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private RecyclerView home_LST_groups;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,11 +40,13 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         findViews();
         initViews();
+
+        binding.homeSignout.setOnClickListener(view -> signout());
         return root;
     }
 
     private void findViews() {
-        home_LST_groups = binding.getRoot().findViewById(R.id.home_LST_groups);
+        home_LST_groups = binding.homeLSTGroups;
     }
 
     private void initViews() {
@@ -62,7 +71,12 @@ public class HomeFragment extends Fragment {
     }
 
 
-
+    private void signout(){
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
+        ((Activity)getContext()).finish();
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
