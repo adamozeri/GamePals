@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
 
     private void initViews() {
         ArrayList<Group> groups = new ArrayList<>();
-        groups.add(new Group("test",5,"test test", "Europe","Beginner", "PC"));
+//        groups.add(new Group("test",5,"test test", "Europe","Beginner", "PC"));
 
         GroupRecyclerAdapter groupAdapter = new GroupRecyclerAdapter(getContext(), groups);
         home_LST_groups.setLayoutManager(new LinearLayoutManager(getContext()));

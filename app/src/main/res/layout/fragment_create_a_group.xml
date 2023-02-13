@@ -78,30 +78,17 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"/>
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_TF_capacity"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:inputType="numberDecimal"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/password"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:inputType="numberDecimal"
-                android:textSize="18sp"/>
-        </LinearLayout>
-
+            android:orientation="horizontal"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/create_TF_description"
@@ -118,6 +105,7 @@
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_BTN_create"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"

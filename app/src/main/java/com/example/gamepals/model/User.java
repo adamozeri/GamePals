@@ -1,23 +1,23 @@
 package com.example.gamepals.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
 
     private static User user = null;
-
     private String name;
     private String uid;
-    private ArrayList<Group> groups;
+    private HashMap<String,Group> groups;
 
     public User() {
-        this.groups = new ArrayList<>();
+        this.groups = new HashMap<>();
     }
 
     public User(String name, String uid) {
         this.name = name;
         this.uid = uid;
-        this.groups = new ArrayList<>();
+        this.groups = new HashMap<>();
     }
 
     public static void init(String name,String uid){
@@ -42,7 +42,8 @@ public class User {
         return name;
     }
 
-    public ArrayList<Group> getGroups() {
+    public HashMap<String,Group> getGroups() {
         return groups;
     }
+
 }

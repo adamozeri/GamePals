@@ -1,51 +1,48 @@
 package com.example.gamepals.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.UUID;
 
 public class Group {
 
-    private enum Region {EUROPE, ASIA, NORTH_AMERICA, SOUTH_AMERICA, AFRICA, OCEANIA};
-    private enum Skill {BEGINNER, EXPERIENCED, PROFESSIONAL};
-    private enum Gaming_Platform {PC, XBOX, PLAYSTATION}
-
+    private HashMap<String, User> users;
+    private String id;
     private String name;
     private int capacity;
     private String description;
-    private Region region;
-    private Skill skill;
-    private Gaming_Platform platform;
+    private String region;
+    private String skill;
+    private String gamingPlatform;
+    private String groupAdmin;
 
-    public Group(String name, int capacity, String description, String region, String skill, String platform) {
+
+    public Group() {}
+
+    public Group(String name, int capacity, String description, String region, String skill, String gamingPlatform) {
         this.name = name;
         this.capacity = capacity;
         this.description = description;
-        setRegion(region);
-        setSkill(skill);
-        setPlatform(platform);
+        this.region = region;
+        this.skill = skill;
+        this.gamingPlatform = gamingPlatform;
+        this.users = new HashMap<>();
+        this.users.put(User.getInstance().getUid(), User.getInstance());
+        this.groupAdmin = User.getInstance().getUid(); // setting the admin to give him more permissions over the group
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getRegion() {
-        return region.toString();
-    }
-
-    public void setRegion(String region) {
-        this.region = Region.valueOf(region.toUpperCase());
+        return region;
     }
 
     public String getSkill() {
-        return skill.toString();
-    }
-
-    public void setSkill(String skill) {
-        this.skill = Skill.valueOf(skill.toUpperCase());
+        return skill;
     }
 
     public String getPlatform() {
-        return platform.toString();
-    }
-
-    public void setPlatform(String platform) {
-        this.platform = Gaming_Platform.valueOf(platform.toUpperCase());
+        return gamingPlatform;
     }
 
     public String getName() {
@@ -58,5 +55,9 @@ public class Group {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getId() {
+        return id;
     }
 }
