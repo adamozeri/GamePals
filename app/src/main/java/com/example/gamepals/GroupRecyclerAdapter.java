@@ -2,6 +2,7 @@ package com.example.gamepals;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +14,21 @@ import com.example.gamepals.model.Group;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdapter.GroupViewHolder>{
+public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdapter.GroupViewHolder> {
 
     private Context context;
-    private ArrayList<Group> groups;
+    private HashMap<String, Group> groups;
     private GroupCallback groupCallback;
 
 
-    public GroupRecyclerAdapter(Context context, ArrayList<Group> groups) {
+    public GroupRecyclerAdapter(Context context) {
         this.context = context;
-        this.groups = groups;
+        this.groups = new HashMap<>();
     }
 
-    public GroupRecyclerAdapter setGroupCallback(GroupCallback joinCallback){
+    public GroupRecyclerAdapter setGroupCallback(GroupCallback joinCallback) {
         this.groupCallback = joinCallback;
         return this;
     }
@@ -42,17 +44,17 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull GroupViewHolder holder, int position) {
         Group group = getItem(position);
-
         holder.group_TV_groupName.setText(group.getName());
         holder.group_TV_groupDescription.setText(group.getDescription());
-        holder.group_TV_capacity.setText(group.getCapacity()+"");
+        holder.group_TV_capacity.setText(group.getCapacity() + "");
         holder.group_TV_region.setText(group.getRegion());
         holder.group_TV_skill.setText(group.getSkill());
         holder.group_TV_platform.setText(group.getPlatform());
     }
 
     private Group getItem(int position) {
-        return groups.get(position);
+        ArrayList<Group> groupsValues = new ArrayList<>(groups.values());
+        return groupsValues.get(position);
     }
 
     @Override
@@ -60,14 +62,20 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
         return groups == null ? 0 : groups.size();
     }
 
+    public void updateGroups(HashMap<String, Group> groups) {
+        this.groups = groups;
+        notifyDataSetChanged();
+    }
 
-    public class GroupViewHolder extends RecyclerView.ViewHolder{
+
+    public class GroupViewHolder extends RecyclerView.ViewHolder {
         private MaterialTextView group_TV_groupName;
         private MaterialTextView group_TV_groupDescription;
         private MaterialTextView group_TV_capacity;
         private MaterialTextView group_TV_region;
         private MaterialTextView group_TV_skill;
         private MaterialTextView group_TV_platform;
+
         public GroupViewHolder(@NonNull View itemView) {
             super(itemView);
             group_TV_groupName = itemView.findViewById(R.id.group_TV_groupName);

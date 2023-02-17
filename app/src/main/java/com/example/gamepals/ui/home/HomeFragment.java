@@ -6,30 +6,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gamepals.GroupRecyclerAdapter;
 import com.example.gamepals.LoginActivity;
-import com.example.gamepals.MainActivity;
-import com.example.gamepals.R;
 import com.example.gamepals.databinding.FragmentHomeBinding;
 import com.example.gamepals.model.Group;
-import com.google.android.material.button.MaterialButton;
+import com.example.gamepals.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private RecyclerView home_LST_groups;
-
+    private GroupRecyclerAdapter groupAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,24 +35,21 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        findViews();
         initViews();
 
-        binding.homeSignout.setOnClickListener(view -> signout());
+        binding.homeSignout.setOnClickListener(view -> signOut());
         return root;
     }
 
-    private void findViews() {
-        home_LST_groups = binding.homeLSTGroups;
-    }
-
     private void initViews() {
-        ArrayList<Group> groups = new ArrayList<>();
-//        groups.add(new Group("test",5,"test test", "Europe","Beginner", "PC"));
+        HomeViewModel homeViewModel = new HomeViewModel();
+        homeViewModel.getGroups().observe(getViewLifecycleOwner(),observer);
 
-        GroupRecyclerAdapter groupAdapter = new GroupRecyclerAdapter(getContext(), groups);
-        home_LST_groups.setLayoutManager(new LinearLayoutManager(getContext()));
-        home_LST_groups.setAdapter(groupAdapter);
+        groupAdapter = new GroupRecyclerAdapter(getContext());
+        binding.homeLSTGroups.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.homeLSTGroups.setAdapter(groupAdapter);
+
+
 //        groupAdapter.setMovieCallback(new MovieCallback() {
 //            @Override
 //            public void favoriteClicked(Movie movie, int position) {
@@ -71,12 +65,23 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void signout(){
+
+
+    private void signOut(){
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
         ((Activity)getContext()).finish();
     }
+
+    Observer<HashMap<String,Group>> observer = new Observer<HashMap<String,Group>>(){
+
+        @Override
+        public void onChanged(HashMap<String,Group> groups) {
+            groupAdapter.updateGroups(groups);
+        }
+    };
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

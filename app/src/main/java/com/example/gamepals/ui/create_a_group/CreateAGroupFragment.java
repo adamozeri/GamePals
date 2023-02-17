@@ -1,6 +1,7 @@
 package com.example.gamepals.ui.create_a_group;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,6 @@ public class CreateAGroupFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         CreateAGroupViewModel createAGroupViewModel =
                 new ViewModelProvider(this).get(CreateAGroupViewModel.class);
-
         binding = FragmentCreateAGroupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.createBTNCreate.setOnClickListener(view -> createGroup());
@@ -31,12 +31,12 @@ public class CreateAGroupFragment extends Fragment {
 
 
     private void createGroup(){
-        String name = binding.createETName.getText().toString();
-        String description = binding.createTFDescription.getEditText().toString();
+        String name = String.valueOf(binding.createETName.getText());
+        String description = String.valueOf(binding.createTFDescription.getText());
         String region = binding.createSPRegion.getSelectedItem().toString();
         String skill = binding.createSPSkill.getSelectedItem().toString();
         String platform = binding.createSPPlatform.getSelectedItem().toString();
-        int capacity = Integer.parseInt(binding.createTFCapacity.getText().toString());
+        int capacity = Integer.parseInt(String.valueOf(binding.createTFCapacity.getText()));
         Group newGroup = new Group(name,capacity,description,region,skill,platform);
         User.getInstance().getGroups().put(newGroup.getId(),newGroup); // adding the group to the user's list
         CreateAGroupViewModel createAGroupViewModel = new CreateAGroupViewModel(newGroup); // updating db

@@ -13,14 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         >
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/group_IMG_groupIMG"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -28,18 +30,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/group_IMG_groupIMG"
-                android:layout_toEndOf="@+id/group_IMG_groupIMG"
                 android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/group_IMG_groupIMG"
                 android:text="Name"
                 android:textSize="18sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/group_TV_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/group_TV_groupName"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/group_IMG_groupIMG"
+                android:text="Game"
+                android:textSize="14sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/group_TV_groupDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/group_TV_groupName"
+                android:layout_below="@+id/group_TV_game"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="6dp"
                 android:layout_toEndOf="@+id/group_IMG_groupIMG"
                 android:text="Description"
                 android:textSize="12sp" />
@@ -48,8 +59,8 @@
                 android:id="@+id/group_LL_tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_below="@id/group_IMG_groupIMG"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -59,8 +70,8 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@drawable/capacity"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/capacity" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/group_TV_capacity"
@@ -79,8 +90,8 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@drawable/globe"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/globe" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/group_TV_region"
@@ -90,6 +101,7 @@
                         android:text="Europe"
                         android:textSize="15sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,8 +110,8 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@drawable/skill"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/skill" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/group_TV_skill"
@@ -109,6 +121,7 @@
                         android:text="Beginner"
                         android:textSize="15sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,8 +131,8 @@
                         android:id="@+id/group_IMG_platform"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@drawable/pc"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/pc" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/group_TV_platform"
@@ -127,17 +140,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:text="PC"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </LinearLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@id/group_IMG_groupIMG"
                 android:layout_alignEnd="@id/group_LL_tags"
                 android:text="@string/join"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
 
 
         </RelativeLayout>
