@@ -1,5 +1,7 @@
 package com.example.gamepals.ui.create_a_group;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,10 +15,8 @@ import java.util.UUID;
 
 public class CreateAGroupViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
 
     public CreateAGroupViewModel() {
-        mText = new MutableLiveData<>();
     }
 
 
@@ -25,6 +25,7 @@ public class CreateAGroupViewModel extends ViewModel {
      **/
     public CreateAGroupViewModel(Group newGroup) {
         this();
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         DatabaseReference databaseReference = db.getReference("Groups");
@@ -32,10 +33,5 @@ public class CreateAGroupViewModel extends ViewModel {
 
         databaseReference = db.getReference("UserInfo");
         databaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
-    }
-
-
-    public LiveData<String> getText() {
-        return mText;
     }
 }

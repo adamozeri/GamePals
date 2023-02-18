@@ -1,6 +1,5 @@
 package com.example.gamepals.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class User {
@@ -46,4 +45,12 @@ public class User {
         return groups;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", uid='" + uid + '\'' +
+                ", groups=" + groups +
+                '}';
+    }
 }

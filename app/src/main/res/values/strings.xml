@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GamePals</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_my_groups">MyGroups</string>
     <string name="title_create_a_group">Create A Group</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>

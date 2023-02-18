@@ -102,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
     private void loadMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        Log.d("log:",User.getInstance().getName());
         finish();
     }
 }

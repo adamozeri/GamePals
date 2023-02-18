@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.gamepals.GroupRecyclerAdapter;
 import com.example.gamepals.LoginActivity;
+import com.example.gamepals.MainActivity;
+import com.example.gamepals.SettingsActivity;
 import com.example.gamepals.databinding.FragmentHomeBinding;
 import com.example.gamepals.model.Group;
 import com.example.gamepals.model.User;
@@ -32,16 +34,21 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        initViews();
 
-        binding.homeSignout.setOnClickListener(view -> signOut());
+        initViews();
+        setCallbacks();
+
+        binding.homeSettings.setOnClickListener(view -> loadSettingsScreen());
+
         return root;
     }
 
+
+
     private void initViews() {
+        binding.homeTVHello.setText("Hello, "+User.getInstance().getName());
         HomeViewModel homeViewModel = new HomeViewModel();
         homeViewModel.getGroups().observe(getViewLifecycleOwner(),observer);
 
@@ -50,7 +57,10 @@ public class HomeFragment extends Fragment {
         binding.homeLSTGroups.setAdapter(groupAdapter);
 
 
-//        groupAdapter.setMovieCallback(new MovieCallback() {
+    }
+
+    private void setCallbacks() {
+        //        groupAdapter.setMovieCallback(new MovieCallback() {
 //            @Override
 //            public void favoriteClicked(Movie movie, int position) {
 //                movie.setFavorite(!movie.isFavorite());
@@ -66,12 +76,9 @@ public class HomeFragment extends Fragment {
 
 
 
-
-    private void signOut(){
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(getContext(), LoginActivity.class);
+    private void loadSettingsScreen() {
+        Intent intent = new Intent(getContext(), SettingsActivity.class);
         startActivity(intent);
-        ((Activity)getContext()).finish();
     }
 
     Observer<HashMap<String,Group>> observer = new Observer<HashMap<String,Group>>(){

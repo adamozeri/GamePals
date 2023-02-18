@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.gamepals.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.example.gamepals.ui.my_groups.MyGroupsFragment"
+        android:label="@string/title_my_groups"
+        tools:layout="@layout/fragment_my_groups" />
 
     <fragment
         android:id="@+id/navigation_create_a_group"

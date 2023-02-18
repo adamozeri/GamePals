@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.create_a_group.CreateAGroupFragment">
+    tools:context=".ui.create_a_group.CreateAGroupFragment"
+    android:layout_marginTop="20dp">
 
     <RelativeLayout
         android:id="@+id/create_LL_imgName"
@@ -12,7 +13,7 @@
         android:layout_height="100dp"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" >
+         >
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/create_IMG_groupIMG"
             android:layout_width="wrap_content"

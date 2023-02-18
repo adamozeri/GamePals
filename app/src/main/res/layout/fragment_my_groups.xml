@@ -4,12 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".ui.my_groups.MyGroupsFragment"
+    android:layout_marginTop="20dp">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/myGroups_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="My Groups"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myGroups_groups"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        tools:listitem="@layout/group_item"/>
+        tools:listitem="@layout/group_item"
+        android:layout_below="@id/myGroups_title"/>
 </RelativeLayout>

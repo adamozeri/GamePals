@@ -46,7 +46,7 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
         Group group = getItem(position);
         holder.group_TV_groupName.setText(group.getName());
         holder.group_TV_groupDescription.setText(group.getDescription());
-        holder.group_TV_capacity.setText(group.getCapacity() + "");
+        holder.group_TV_capacity.setText(group.getNumOfUsers()+"/" + group.getCapacity());
         holder.group_TV_region.setText(group.getRegion());
         holder.group_TV_skill.setText(group.getSkill());
         holder.group_TV_platform.setText(group.getPlatform());
