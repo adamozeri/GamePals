@@ -3,6 +3,7 @@ package com.example.gamepals.ui.home;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.gamepals.GroupCallback;
 import com.example.gamepals.GroupRecyclerAdapter;
 import com.example.gamepals.LoginActivity;
 import com.example.gamepals.MainActivity;
@@ -42,6 +44,7 @@ public class HomeFragment extends Fragment {
 
         binding.homeSettings.setOnClickListener(view -> loadSettingsScreen());
 
+        Log.d("checky",User.getInstance().toString());
         return root;
     }
 
@@ -55,26 +58,27 @@ public class HomeFragment extends Fragment {
         groupAdapter = new GroupRecyclerAdapter(getContext());
         binding.homeLSTGroups.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.homeLSTGroups.setAdapter(groupAdapter);
-
-
     }
 
     private void setCallbacks() {
-        //        groupAdapter.setMovieCallback(new MovieCallback() {
-//            @Override
-//            public void favoriteClicked(Movie movie, int position) {
-//                movie.setFavorite(!movie.isFavorite());
-//                home_LST_groups.getAdapter().notifyItemChanged(position);
-//            }
-//
-//            @Override
-//            public void itemClicked(Movie movie, int position) {
-//                Toast.makeText(MainActivity.this,""+ movie.getTitle() + " has been clicked!",Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        groupAdapter.setGroupCallback(new GroupCallback() {
+            @Override
+            public void joinClicked(Group group,int position) {
+                User.getInstance().getGroups().put(group.getId(),group);
+                group.addUser(User.getInstance());
+                binding.homeLSTGroups.getAdapter().notifyItemChanged(position);
+                Log.d("group:", group.getUsers().toString());
+                Log.d("User String:", User.getInstance().getGroups().toString());
+                HomeViewModel homeViewModel = new HomeViewModel(group);
+            }
+
+            @Override
+            public void itemClicked(Group group,int position) {
+
+            }
+        });
+
     }
-
-
 
     private void loadSettingsScreen() {
         Intent intent = new Intent(getContext(), SettingsActivity.class);

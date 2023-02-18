@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gamepals.model.Group;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
@@ -76,6 +77,8 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
         private MaterialTextView group_TV_skill;
         private MaterialTextView group_TV_platform;
 
+        private MaterialButton group_BTN_join;
+
         public GroupViewHolder(@NonNull View itemView) {
             super(itemView);
             group_TV_groupName = itemView.findViewById(R.id.group_TV_groupName);
@@ -84,6 +87,9 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
             group_TV_region = itemView.findViewById(R.id.group_TV_region);
             group_TV_skill = itemView.findViewById(R.id.group_TV_skill);
             group_TV_platform = itemView.findViewById(R.id.group_TV_platform);
+            group_BTN_join = itemView.findViewById(R.id.group_BTN_join);
+            itemView.setOnClickListener(view -> groupCallback.itemClicked(getItem(getAdapterPosition()),getAdapterPosition()));
+            group_BTN_join.setOnClickListener(view -> groupCallback.joinClicked(getItem(getAdapterPosition()),getAdapterPosition()));
         }
     }
 }

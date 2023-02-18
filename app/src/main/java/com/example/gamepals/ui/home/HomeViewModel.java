@@ -61,6 +61,17 @@ public class HomeViewModel extends ViewModel {
 
     }
 
+    public HomeViewModel(Group group) {
+        this();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+        DatabaseReference databaseReference = db.getReference("Groups");
+        databaseReference.child(group.getId()).setValue(group);
+
+        databaseReference = db.getReference("UserInfo");
+        databaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
+    }
+
     public MutableLiveData<HashMap<String, Group>> getGroups() {
         return mGroups;
     }

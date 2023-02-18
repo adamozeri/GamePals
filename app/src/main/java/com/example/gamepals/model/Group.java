@@ -1,5 +1,7 @@
 package com.example.gamepals.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -72,6 +74,11 @@ public class Group {
     }
     public void setNumOfUsers(int numOfUsers) {
         this.numOfUsers = numOfUsers;
+    }
+
+    public void addUser(User user){
+        usersID.add(user.getUid());
+        numOfUsers++;
     }
 
     @Override
