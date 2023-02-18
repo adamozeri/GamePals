@@ -1,6 +1,5 @@
 package com.example.gamepals.ui.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,21 +15,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.gamepals.GroupCallback;
 import com.example.gamepals.GroupRecyclerAdapter;
-import com.example.gamepals.LoginActivity;
-import com.example.gamepals.MainActivity;
 import com.example.gamepals.SettingsActivity;
 import com.example.gamepals.databinding.FragmentHomeBinding;
 import com.example.gamepals.model.Group;
 import com.example.gamepals.model.User;
-import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private GroupRecyclerAdapter groupAdapter;
+    private Observer<HashMap<String,Group>> observer = new Observer<HashMap<String,Group>>(){
+
+        @Override
+        public void onChanged(HashMap<String,Group> groups) {
+            groupAdapter.updateGroups(groups);
+        }
+    };
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class HomeFragment extends Fragment {
         HomeViewModel homeViewModel = new HomeViewModel();
         homeViewModel.getGroups().observe(getViewLifecycleOwner(),observer);
 
-        groupAdapter = new GroupRecyclerAdapter(getContext());
+        groupAdapter = new GroupRecyclerAdapter(this);
         binding.homeLSTGroups.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.homeLSTGroups.setAdapter(groupAdapter);
     }
@@ -67,8 +69,6 @@ public class HomeFragment extends Fragment {
                 User.getInstance().getGroups().put(group.getId(),group);
                 group.addUser(User.getInstance());
                 binding.homeLSTGroups.getAdapter().notifyItemChanged(position);
-                Log.d("group:", group.getUsers().toString());
-                Log.d("User String:", User.getInstance().getGroups().toString());
                 HomeViewModel homeViewModel = new HomeViewModel(group);
             }
 
@@ -85,13 +85,7 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
-    Observer<HashMap<String,Group>> observer = new Observer<HashMap<String,Group>>(){
 
-        @Override
-        public void onChanged(HashMap<String,Group> groups) {
-            groupAdapter.updateGroups(groups);
-        }
-    };
 
     @Override
     public void onDestroyView() {

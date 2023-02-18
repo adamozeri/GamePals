@@ -2,15 +2,16 @@ package com.example.gamepals;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gamepals.model.Group;
+import com.example.gamepals.ui.my_groups.MyGroupsFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -19,14 +20,14 @@ import java.util.HashMap;
 
 public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdapter.GroupViewHolder> {
 
-    private Context context;
+    private Fragment fragment;
     private HashMap<String, Group> groups;
     private GroupCallback groupCallback;
 
 
-    public GroupRecyclerAdapter(Context context) {
-        this.context = context;
+    public GroupRecyclerAdapter(Fragment fragment) {
         this.groups = new HashMap<>();
+        this.fragment = fragment;
     }
 
     public GroupRecyclerAdapter setGroupCallback(GroupCallback joinCallback) {
@@ -76,7 +77,6 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
         private MaterialTextView group_TV_region;
         private MaterialTextView group_TV_skill;
         private MaterialTextView group_TV_platform;
-
         private MaterialButton group_BTN_join;
 
         public GroupViewHolder(@NonNull View itemView) {
@@ -90,6 +90,8 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
             group_BTN_join = itemView.findViewById(R.id.group_BTN_join);
             itemView.setOnClickListener(view -> groupCallback.itemClicked(getItem(getAdapterPosition()),getAdapterPosition()));
             group_BTN_join.setOnClickListener(view -> groupCallback.joinClicked(getItem(getAdapterPosition()),getAdapterPosition()));
+            if(fragment instanceof MyGroupsFragment)
+                group_BTN_join.setVisibility(View.INVISIBLE);
         }
     }
 }

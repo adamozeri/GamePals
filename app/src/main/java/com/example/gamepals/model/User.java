@@ -45,6 +45,22 @@ public class User {
         return groups;
     }
 
+    public static User getUser() {
+        return user;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setGroups(HashMap<String, Group> groups) {
+        this.groups = groups;
+    }
+
     @Override
     public String toString() {
         return "User{" +

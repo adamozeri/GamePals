@@ -21,7 +21,8 @@ public class Group {
     private String groupAdmin;
 
 
-    public Group() {}
+    public Group() {
+    }
 
     public Group(String name, int capacity, String description, String region, String skill, String gamingPlatform) {
         this.name = name;
@@ -35,6 +36,12 @@ public class Group {
         this.numOfUsers = 1;
         this.groupAdmin = User.getInstance().getUid(); // setting the admin to give him more permissions over the group
         this.id = UUID.randomUUID().toString();
+    }
+
+
+    public void addUser(User user) {
+        usersID.add(user.getUid());
+        numOfUsers++;
     }
 
     public String getRegion() {
@@ -72,13 +79,57 @@ public class Group {
     public int getNumOfUsers() {
         return numOfUsers;
     }
+
     public void setNumOfUsers(int numOfUsers) {
         this.numOfUsers = numOfUsers;
     }
 
-    public void addUser(User user){
-        usersID.add(user.getUid());
-        numOfUsers++;
+    public ArrayList<String> getUsersID() {
+        return usersID;
+    }
+
+    public void setUsersID(ArrayList<String> usersID) {
+        this.usersID = usersID;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    public String getGamingPlatform() {
+        return gamingPlatform;
+    }
+
+    public void setGamingPlatform(String gamingPlatform) {
+        this.gamingPlatform = gamingPlatform;
+    }
+
+    public String getGroupAdmin() {
+        return groupAdmin;
+    }
+
+    public void setGroupAdmin(String groupAdmin) {
+        this.groupAdmin = groupAdmin;
     }
 
     @Override

@@ -11,7 +11,7 @@
         android:id="@+id/settings_BTN_back"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/arrow_back"
+        android:src="@drawable/ic_arrow_back"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         android:backgroundTint="#00000000"

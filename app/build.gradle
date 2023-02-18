@@ -58,4 +58,7 @@ dependencies {
 
     // Lottie animation
     implementation 'com.airbnb.android:lottie:5.2.0'
+
+    //rounded image view
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }
