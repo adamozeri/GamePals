@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.model.Group;
 import com.example.gamepals.model.User;
 import com.google.firebase.database.ChildEventListener;
@@ -25,7 +26,7 @@ public class HomeViewModel extends ViewModel {
         mGroups = new MutableLiveData<>();
         HashMap<String,Group> groups = new HashMap<>();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = db.getReference().child("Groups");
+        DatabaseReference databaseReference = db.getReference().child(Constants.DB_GROUPS);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -65,10 +66,10 @@ public class HomeViewModel extends ViewModel {
         this();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        DatabaseReference databaseReference = db.getReference("Groups");
+        DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
         databaseReference.child(group.getId()).setValue(group);
 
-        databaseReference = db.getReference("UserInfo");
+        databaseReference = db.getReference(Constants.DB_USERS);
         databaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
     }
 

@@ -12,7 +12,7 @@
         android:theme="@style/Theme.GamePals"
         tools:targetApi="31">
         <activity
-            android:name=".ChatActivity"
+            android:name=".ui.chat.ChatActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"

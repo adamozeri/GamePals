@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.my_groups.MyGroupsFragment"
-    android:layout_marginTop="20dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.favorites_games.FavoriteGamesFragment">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/myGroups_title"
+        android:id="@+id/fav_LBL_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="My Groups"
-        android:textSize="40sp"
-        android:textStyle="bold"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myGroups_groups"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        tools:listitem="@layout/group_item"
-        android:layout_below="@id/myGroups_title"
+        android:layout_marginTop="10dp"
+        android:text="@string/favorite_games"
+        android:textSize="24sp"
+        android:textStyle="bold"
         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fav_GRID_games"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/fav_LBL_title"
+        tools:listitem="@layout/game_item" />
+
 </RelativeLayout>

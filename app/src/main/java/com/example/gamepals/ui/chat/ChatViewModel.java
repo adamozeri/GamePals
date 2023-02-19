@@ -1,4 +1,4 @@
-package com.example.gamepals.ui.my_groups;
+package com.example.gamepals.ui.chat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,34 +6,35 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.gamepals.Utils.Constants;
+import com.example.gamepals.model.ChatMessage;
 import com.example.gamepals.model.Group;
-import com.example.gamepals.model.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
-public class MyGroupsViewModel extends ViewModel {
+public class ChatViewModel extends ViewModel {
 
-    private final MutableLiveData<HashMap<String, Group>> mGroups;
+    private final MutableLiveData<ArrayList<ChatMessage>> mChatMessages;
 
-    public MyGroupsViewModel() {
-        mGroups = new MutableLiveData<>();
-        HashMap<String,Group> groups = new HashMap<>();
+    public ChatViewModel(){
+        mChatMessages = new MutableLiveData<>();
+    }
+    public ChatViewModel(String groupId) {
+        this();
+        ArrayList<ChatMessage> chatMessages = new ArrayList<>();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = db.getReference().child(Constants.DB_GROUPS);
+        DatabaseReference databaseReference = db.getReference().child(Constants.DB_GROUPS).child(groupId).child(Constants.DB_CHAT);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Group newGroup = snapshot.getValue(Group.class);
-                if(newGroup != null){
-                    if(User.getInstance().getGroups().get(newGroup.getId()) != null){
-                        groups.put(newGroup.getId(),newGroup);
-                        mGroups.setValue(groups);
-                    }
+                ChatMessage newMessage = snapshot.getValue(ChatMessage.class);
+                if(newMessage != null){
+                    chatMessages.add(newMessage);
+                    mChatMessages.setValue(chatMessages);
                 }
             }
 
@@ -57,10 +58,18 @@ public class MyGroupsViewModel extends ViewModel {
 
             }
         });
-
     }
 
-    public MutableLiveData<HashMap<String, Group>> getGroups() {
-        return mGroups;
+    public ChatViewModel(Group group) {
+        this();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+        DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
+        databaseReference.child(group.getId()).child(Constants.DB_CHAT).setValue(group.getChatMessages());
+    }
+
+
+    public MutableLiveData<ArrayList<ChatMessage>> getChatMessages(){
+        return mChatMessages;
     }
 }

@@ -2,7 +2,7 @@ package com.example.gamepals.ui.my_groups;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +13,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.gamepals.ChatActivity;
+import com.example.gamepals.ui.chat.ChatActivity;
 import com.example.gamepals.GroupCallback;
-import com.example.gamepals.GroupRecyclerAdapter;
-import com.example.gamepals.SettingsActivity;
+import com.example.gamepals.Adapters.GroupRecyclerAdapter;
+import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.databinding.FragmentMyGroupsBinding;
 import com.example.gamepals.model.Group;
-import com.example.gamepals.model.User;
-import com.example.gamepals.ui.home.HomeViewModel;
 
 import java.util.HashMap;
 
@@ -30,9 +28,9 @@ public class MyGroupsFragment extends Fragment {
 
     private GroupRecyclerAdapter groupAdapter;
 
-    private Observer<HashMap<String, Group>> observer = new Observer<HashMap<String,Group>>(){
+    private Observer<HashMap<String, Group>> observer = new Observer<HashMap<String, Group>>() {
         @Override
-        public void onChanged(HashMap<String,Group> groups) {
+        public void onChanged(HashMap<String, Group> groups) {
             groupAdapter.updateGroups(groups);
         }
     };
@@ -51,7 +49,7 @@ public class MyGroupsFragment extends Fragment {
 
     private void initViews() {
         MyGroupsViewModel myGroupsViewModel = new MyGroupsViewModel();
-        myGroupsViewModel.getGroups().observe(getViewLifecycleOwner(),observer);
+        myGroupsViewModel.getGroups().observe(getViewLifecycleOwner(), observer);
 
         groupAdapter = new GroupRecyclerAdapter(this);
         binding.myGroupsGroups.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -61,18 +59,19 @@ public class MyGroupsFragment extends Fragment {
     private void setCallbacks() {
         groupAdapter.setGroupCallback(new GroupCallback() {
             @Override
-            public void joinClicked(Group group,int position) {
+            public void joinClicked(Group group, int position) {
             }
 
             @Override
-            public void itemClicked(Group group,int position) {
-                loadChatActivity();
+            public void itemClicked(Group group, int position) {
+                loadChatActivity(group);
             }
         });
     }
 
-    private void loadChatActivity() {
+    private void loadChatActivity(Group group) {
         Intent intent = new Intent(getContext(), ChatActivity.class);
+        intent.putExtra(Constants.KEY_GROUP, group);
         startActivity(intent);
     }
 

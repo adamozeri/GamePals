@@ -1,7 +1,6 @@
-package com.example.gamepals;
+package com.example.gamepals.Adapters;
 
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gamepals.GroupCallback;
+import com.example.gamepals.R;
 import com.example.gamepals.model.Group;
 import com.example.gamepals.ui.my_groups.MyGroupsFragment;
 import com.google.android.material.button.MaterialButton;
@@ -30,8 +31,8 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
         this.fragment = fragment;
     }
 
-    public GroupRecyclerAdapter setGroupCallback(GroupCallback joinCallback) {
-        this.groupCallback = joinCallback;
+    public GroupRecyclerAdapter setGroupCallback(GroupCallback groupCallback) {
+        this.groupCallback = groupCallback;
         return this;
     }
 
@@ -66,6 +67,11 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdap
 
     public void updateGroups(HashMap<String, Group> groups) {
         this.groups = groups;
+        notifyDataSetChanged();
+    }
+
+    public void removeGroup(String groupID){
+        groups.remove(groupID);
         notifyDataSetChanged();
     }
 

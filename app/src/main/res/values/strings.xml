@@ -4,6 +4,7 @@
     <string name="title_my_groups">MyGroups</string>
     <string name="title_create_a_group">Create A Group</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_favorite_games">Favorite Games</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -19,6 +20,7 @@
     <string name="password">Password</string>
     <string name="join">Join</string>
     <string name="type_a_message">Type a message</string>
+    <string name="favorite_games">Favorite Games</string>
 
     <string-array name="Region">
         <item>Any</item>
@@ -41,4 +43,6 @@
         <item>Playstation</item>
         <item>Xbox</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

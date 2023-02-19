@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loadUser() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = db.getReference("UserInfo");
+        DatabaseReference databaseReference = db.getReference(Constants.DB_USERS);
         databaseReference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

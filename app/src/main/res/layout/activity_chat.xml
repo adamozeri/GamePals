@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity"
+    tools:context=".ui.chat.ChatActivity"
     android:background="#274F97">
 
 
@@ -14,20 +14,20 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_content"
         android:layout_alignBottom="@id/chat_LST_chatLst"/>
-    <com.google.android.material.imageview.ShapeableImageView
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/chat_BTN_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_arrow_back"
         android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginStart="16dp"
+        android:background="@color/transparent"/>
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/chat_TV_groupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:text="Test"
         android:textSize="20sp"
         android:layout_alignBottom="@id/chat_BTN_back"/>
     <androidx.recyclerview.widget.RecyclerView
@@ -39,8 +39,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/chat_BTN_back"
         android:orientation="vertical"
-        android:padding="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:padding="20dp" />
     <LinearLayout
         android:id="@+id/chat_LL_msg"
         android:layout_width="match_parent"

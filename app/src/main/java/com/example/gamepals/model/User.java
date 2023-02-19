@@ -1,5 +1,6 @@
 package com.example.gamepals.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class User {
@@ -9,6 +10,8 @@ public class User {
     private String uid;
     private HashMap<String,Group> groups;
 
+    private ArrayList<Game> favoriteGames;
+
     public User() {
         this.groups = new HashMap<>();
     }
@@ -17,6 +20,7 @@ public class User {
         this.name = name;
         this.uid = uid;
         this.groups = new HashMap<>();
+        this.favoriteGames = new ArrayList<>();
     }
 
     public static void init(String name,String uid){
@@ -28,6 +32,7 @@ public class User {
         this.name = currentUser.getName();
         this.uid = currentUser.getUid();
         this.groups = currentUser.getGroups();
+        this.favoriteGames = currentUser.getFavoriteGames();
     }
     public static User getInstance(){
         return user;
@@ -61,12 +66,21 @@ public class User {
         this.groups = groups;
     }
 
+    public ArrayList<Game> getFavoriteGames() {
+        return favoriteGames;
+    }
+
+    public void setFavoriteGames(ArrayList<Game> favoriteGames) {
+        this.favoriteGames = favoriteGames;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
                 ", uid='" + uid + '\'' +
                 ", groups=" + groups +
+                ", favoriteGames=" + favoriteGames +
                 '}';
     }
 }

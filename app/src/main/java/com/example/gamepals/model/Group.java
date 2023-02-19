@@ -1,15 +1,20 @@
 package com.example.gamepals.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
 
-public class Group {
+public class Group implements Parcelable {
 
     private ArrayList<String> usersID;
+    private ArrayList<ChatMessage> chatMessages;
     private String id;
     private String name;
     private int capacity;
@@ -36,8 +41,52 @@ public class Group {
         this.numOfUsers = 1;
         this.groupAdmin = User.getInstance().getUid(); // setting the admin to give him more permissions over the group
         this.id = UUID.randomUUID().toString();
+        this.chatMessages = new ArrayList<>();
     }
 
+    protected Group(Parcel in) {
+        usersID = in.createStringArrayList();
+        chatMessages = in.createTypedArrayList(ChatMessage.CREATOR);
+        id = in.readString();
+        name = in.readString();
+        capacity = in.readInt();
+        numOfUsers = in.readInt();
+        description = in.readString();
+        region = in.readString();
+        skill = in.readString();
+        gamingPlatform = in.readString();
+        groupAdmin = in.readString();
+    }
+
+    public static final Creator<Group> CREATOR = new Creator<Group>() {
+        @Override
+        public Group createFromParcel(Parcel in) {
+            return new Group(in);
+        }
+
+        @Override
+        public Group[] newArray(int size) {
+            return new Group[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(id);
+        parcel.writeString(name);
+        parcel.writeInt(capacity);
+        parcel.writeInt(numOfUsers);
+        parcel.writeString(description);
+        parcel.writeString(region);
+        parcel.writeStringList(usersID);
+        parcel.writeTypedList(chatMessages);
+    }
 
     public void addUser(User user) {
         usersID.add(user.getUid());
@@ -70,10 +119,6 @@ public class Group {
 
     public String getId() {
         return id;
-    }
-
-    public ArrayList<String> getUsers() {
-        return usersID;
     }
 
     public int getNumOfUsers() {
@@ -132,10 +177,21 @@ public class Group {
         this.groupAdmin = groupAdmin;
     }
 
+    public ArrayList<ChatMessage> getChatMessages() {
+        return chatMessages;
+    }
+
+    public void setChatMessages(ArrayList<ChatMessage> chatMessages) {
+        this.chatMessages = chatMessages;
+    }
+
+
+
     @Override
     public String toString() {
         return "Group{" +
-                "users=" + usersID +
+                "usersID=" + usersID +
+                ", chatMessages=" + chatMessages +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", capacity=" + capacity +
@@ -147,4 +203,5 @@ public class Group {
                 ", groupAdmin='" + groupAdmin + '\'' +
                 '}';
     }
+
 }

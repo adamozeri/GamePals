@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.gamepals.GroupCallback;
-import com.example.gamepals.GroupRecyclerAdapter;
+import com.example.gamepals.Adapters.GroupRecyclerAdapter;
 import com.example.gamepals.SettingsActivity;
 import com.example.gamepals.databinding.FragmentHomeBinding;
 import com.example.gamepals.model.Group;
@@ -44,9 +44,6 @@ public class HomeFragment extends Fragment {
         initViews();
         setCallbacks();
 
-        binding.homeSettings.setOnClickListener(view -> loadSettingsScreen());
-
-        Log.d("checky",User.getInstance().toString());
         return root;
     }
 
@@ -60,6 +57,7 @@ public class HomeFragment extends Fragment {
         groupAdapter = new GroupRecyclerAdapter(this);
         binding.homeLSTGroups.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.homeLSTGroups.setAdapter(groupAdapter);
+        binding.homeSettings.setOnClickListener(view -> loadSettingsScreen());
     }
 
     private void setCallbacks() {
@@ -68,7 +66,7 @@ public class HomeFragment extends Fragment {
             public void joinClicked(Group group,int position) {
                 User.getInstance().getGroups().put(group.getId(),group);
                 group.addUser(User.getInstance());
-                binding.homeLSTGroups.getAdapter().notifyItemChanged(position);
+                groupAdapter.removeGroup(group.getId());
                 HomeViewModel homeViewModel = new HomeViewModel(group);
             }
 
