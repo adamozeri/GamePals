@@ -63,4 +63,22 @@ public class MyGroupsViewModel extends ViewModel {
     public MutableLiveData<HashMap<String, Group>> getGroups() {
         return mGroups;
     }
+
+    public void updateUserDB() {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = db.getReference(Constants.DB_USERS);
+        databaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
+    }
+
+    public void removeGroupFromDB(String groupID) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
+        databaseReference.child(groupID).removeValue();
+    }
+
+    public void updateGroupDB(Group group) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
+        databaseReference.child(group.getId()).setValue(group);
+    }
 }

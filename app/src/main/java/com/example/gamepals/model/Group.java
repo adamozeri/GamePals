@@ -17,21 +17,23 @@ public class Group {
     private ArrayList<ChatMessage> chatMessages;
     private String id;
     private String name;
+
+    private String gameName;
     private int capacity;
     private int numOfUsers;
     private String description;
     private String region;
     private String skill;
     private String gamingPlatform;
-    private String groupAdmin;
 
 
     public Group() {
     }
 
-    public Group(String name, int capacity, String description, String region, String skill, String gamingPlatform) {
+    public Group(String name, int capacity, String gameName, String description, String region, String skill, String gamingPlatform) {
         this.name = name;
         this.capacity = capacity;
+        this.gameName = gameName;
         this.description = description;
         this.region = region;
         this.skill = skill;
@@ -39,7 +41,6 @@ public class Group {
         this.usersID = new ArrayList<>();
         this.usersID.add(User.getInstance().getUid());
         this.numOfUsers = 1;
-        this.groupAdmin = User.getInstance().getUid(); // setting the admin to give him more permissions over the group
         this.id = UUID.randomUUID().toString();
         this.chatMessages = new ArrayList<>();
     }
@@ -48,6 +49,14 @@ public class Group {
     public void addUser(User user) {
         usersID.add(user.getUid());
         numOfUsers++;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     public String getRegion() {
@@ -126,13 +135,7 @@ public class Group {
         this.gamingPlatform = gamingPlatform;
     }
 
-    public String getGroupAdmin() {
-        return groupAdmin;
-    }
 
-    public void setGroupAdmin(String groupAdmin) {
-        this.groupAdmin = groupAdmin;
-    }
 
     public ArrayList<ChatMessage> getChatMessages() {
         return chatMessages;
@@ -162,7 +165,6 @@ public class Group {
                 ", region='" + region + '\'' +
                 ", skill='" + skill + '\'' +
                 ", gamingPlatform='" + gamingPlatform + '\'' +
-                ", groupAdmin='" + groupAdmin + '\'' +
                 '}';
     }
 

@@ -4,4 +4,5 @@ import com.example.gamepals.model.Game;
 
 public interface GameCallback {
     void favoriteClicked(Game game, int position);
+    void itemClicked(Game game, int position);
 }

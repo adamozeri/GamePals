@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.gamepals.model.User;
 import com.example.gamepals.ui.chat.ChatActivity;
 import com.example.gamepals.GroupCallback;
 import com.example.gamepals.Adapters.GroupAdapter;
@@ -26,6 +27,8 @@ public class MyGroupsFragment extends Fragment {
     private FragmentMyGroupsBinding binding;
 
     private GroupAdapter groupAdapter;
+
+    private MyGroupsViewModel myGroupsViewModel;
 
     private Observer<HashMap<String, Group>> observer = new Observer<HashMap<String, Group>>() {
         @Override
@@ -47,7 +50,7 @@ public class MyGroupsFragment extends Fragment {
     }
 
     private void initViews() {
-        MyGroupsViewModel myGroupsViewModel = new MyGroupsViewModel();
+        myGroupsViewModel = new MyGroupsViewModel();
         myGroupsViewModel.getGroups().observe(getViewLifecycleOwner(), observer);
 
         groupAdapter = new GroupAdapter(this);
@@ -67,8 +70,18 @@ public class MyGroupsFragment extends Fragment {
             }
 
             @Override
-            public void leaveClicked(Group item, int position) {
-
+            public void leaveClicked(Group group, int position) {
+                group.getUsersID().remove(User.getInstance().getUid());
+                User.getInstance().getGroups().remove(group.getId());
+                if(group.getUsersID().isEmpty()){
+                    myGroupsViewModel.removeGroupFromDB(group.getId());
+                }
+                else{
+                    myGroupsViewModel.updateGroupDB(group);
+                }
+                groupAdapter.removeGroup(group.getId());
+                groupAdapter.notifyItemRemoved(position);
+                myGroupsViewModel.updateUserDB();
             }
         });
     }

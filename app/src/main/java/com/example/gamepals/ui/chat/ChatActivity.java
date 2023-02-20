@@ -56,7 +56,9 @@ public class ChatActivity extends AppCompatActivity {
         chatViewModel = new ChatViewModel(groupID);
         chatViewModel.getChatMessages().observe(this,observer);
         chatAdapter = new ChatAdapter();
-        binding.chatLSTChatLst.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        binding.chatLSTChatLst.setLayoutManager(linearLayoutManager);
         binding.chatLSTChatLst.setAdapter(chatAdapter);
         User.getInstance().getGroups().get(groupID).setChatMessages(chatViewModel.getMessagesFromDB(groupID));
     }

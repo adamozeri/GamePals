@@ -15,7 +15,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="name">Enter a Name</string>
     <string name="description">Description</string>
-    <string name="create">Create Group</string>
+    <string name="create">Create A group</string>
     <string name="capacity">Capacity</string>
     <string name="password">Password</string>
     <string name="join">Join</string>

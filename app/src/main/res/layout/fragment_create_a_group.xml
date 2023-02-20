@@ -5,22 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.create_a_group.CreateAGroupFragment"
-    android:layout_marginTop="20dp">
+    android:layout_marginTop="30dp">
 
-    <RelativeLayout
-        android:id="@+id/create_LL_imgName"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/create_LBL_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/create"
         android:layout_centerHorizontal="true"
-         >
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/create_IMG_groupIMG"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_launcher_background"
+        android:textStyle="bold"/>
 
-            />
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/create_LBL_title">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_ET_name"
             android:layout_width="match_parent"
@@ -29,41 +32,56 @@
             android:hint="@string/name"
             android:textAlignment="center"
             android:textColorHint="@color/grey"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:layout_alignBottom="@+id/create_IMG_groupIMG"
-            android:layout_toEndOf="@id/create_IMG_groupIMG"
+            android:textStyle="bold" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game"
+            android:layout_marginTop="10dp"/>
+        <!-- text view to show the selected item-->
+        <TextView
+            android:id="@+id/create_LBL_gameName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select A Game"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:drawableEnd="@drawable/ic_arrow"
+            android:background="@android:drawable/editbox_background"
             />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/create_LL_imgName">
-
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Region"
+            android:layout_marginTop="10dp"/>
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/create_SP_region"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
             android:entries="@array/Region"
             android:dropDownWidth="250dp"
             />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skill Level"
+            android:layout_marginTop="10dp"/>
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/create_SP_skill"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
             android:entries="@array/Skill"
             android:dropDownWidth="250dp"
             />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gaming Platform"
+            android:layout_marginTop="10dp"/>
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/create_SP_platform"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
             android:entries="@array/Platform"
             android:dropDownWidth="250dp"
             android:backgroundTintMode="multiply"
@@ -101,7 +119,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_TF_description"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="120dp"
                 android:inputType="text"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>

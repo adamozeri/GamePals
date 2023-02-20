@@ -83,7 +83,6 @@ public class ChatViewModel extends ViewModel {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 ChatMessage newMessage = snapshot.getValue(ChatMessage.class);
-                Log.d("message1",newMessage.getMessage());
                 chatMessages.add(newMessage);
             }
 
