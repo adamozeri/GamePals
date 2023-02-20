@@ -32,8 +32,8 @@
         android:layout_alignBottom="@id/chat_BTN_back"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_LST_chatLst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@id/chat_LL_msg"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
@@ -52,20 +52,22 @@
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/chat_ET_msgInput"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:hint="@string/type_a_message"
             android:background="@drawable/background_chat_input"
             android:layout_weight="100"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:textColorHint="@color/white"
+            android:textColorHint="#ABFFFFFF"
+            android:textColor="@color/white"
             android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:elevation="5dp"
             />
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/chat_FAB_send"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:elevation="10dp"
             app:icon="@drawable/ic_send"

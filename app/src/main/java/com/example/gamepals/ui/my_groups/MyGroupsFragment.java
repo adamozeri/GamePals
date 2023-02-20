@@ -65,6 +65,11 @@ public class MyGroupsFragment extends Fragment {
             public void itemClicked(Group group, int position) {
                 loadChatActivity(group);
             }
+
+            @Override
+            public void leaveClicked(Group item, int position) {
+
+            }
         });
     }
 

@@ -84,6 +84,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
         private MaterialTextView group_TV_skill;
         private MaterialTextView group_TV_platform;
         private MaterialButton group_BTN_join;
+        private MaterialButton group_BTN_leave;
 
         public GroupViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,10 +95,18 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
             group_TV_skill = itemView.findViewById(R.id.group_TV_skill);
             group_TV_platform = itemView.findViewById(R.id.group_TV_platform);
             group_BTN_join = itemView.findViewById(R.id.group_BTN_join);
+            group_BTN_leave = itemView.findViewById(R.id.group_BTN_leave);
             itemView.setOnClickListener(view -> groupCallback.itemClicked(getItem(getAdapterPosition()),getAdapterPosition()));
             group_BTN_join.setOnClickListener(view -> groupCallback.joinClicked(getItem(getAdapterPosition()),getAdapterPosition()));
-            if(fragment instanceof MyGroupsFragment)
+            group_BTN_leave.setOnClickListener(view -> groupCallback.leaveClicked(getItem(getAdapterPosition()),getAdapterPosition()));
+            if(fragment instanceof MyGroupsFragment){
                 group_BTN_join.setVisibility(View.INVISIBLE);
+                group_BTN_leave.setVisibility(View.VISIBLE);
+            }
+            else{
+                group_BTN_join.setVisibility(View.VISIBLE);
+                group_BTN_leave.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }

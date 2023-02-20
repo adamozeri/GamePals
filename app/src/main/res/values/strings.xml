@@ -19,6 +19,7 @@
     <string name="capacity">Capacity</string>
     <string name="password">Password</string>
     <string name="join">Join</string>
+    <string name="leave">Leave</string>
     <string name="type_a_message">Type a message</string>
     <string name="favorite_games">Favorite Games</string>
     <string name="search_a_game">Search a game</string>

@@ -54,10 +54,6 @@ public class User {
         return groups;
     }
 
-    public static User getUser() {
-        return user;
-    }
-
     public void setName(String name) {
         this.name = name;
     }

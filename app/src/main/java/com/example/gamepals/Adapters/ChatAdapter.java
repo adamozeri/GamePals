@@ -18,11 +18,9 @@ import java.util.ArrayList;
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<ChatMessage> chatMessages;
-//    private final Bitmap receiverProfileImage;
 
     public ChatAdapter() {
         this.chatMessages = new ArrayList<>();
-//        this.receiverProfileImage = receiverProfileImage;
     }
 
     @NonNull
@@ -70,6 +68,10 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public ArrayList<ChatMessage> getChatMessages() {
+        return chatMessages;
+    }
+
     public class SentMessageViewHolder extends RecyclerView.ViewHolder {
 
         private final SentMessageItemBinding binding;
@@ -81,7 +83,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void setData(ChatMessage chatMessage) {
             binding.sentMessage.setText(chatMessage.getMessage());
-            binding.sentDateTime.setText(chatMessage.getDateTime().toString());
+            binding.sentDateTime.setText(chatMessage.getDateTime());
+            binding.sentName.setText(chatMessage.getSenderName());
         }
     }
 
@@ -97,6 +100,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private void setData(ChatMessage chatMessage) {
             binding.receivedMessage.setText(chatMessage.getMessage());
             binding.receivedDateTime.setText(chatMessage.getDateTime());
+            binding.receivedName.setText(chatMessage.getSenderName());
         }
     }
 }

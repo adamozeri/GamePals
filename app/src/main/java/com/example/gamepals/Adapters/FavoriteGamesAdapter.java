@@ -23,9 +23,6 @@ public class FavoriteGamesAdapter extends RecyclerView.Adapter<FavoriteGamesAdap
 
     private Context context;
     private ArrayList<Game> games;
-
-    private ArrayList<Game> filteredGames;
-    private ArrayList<Game> fullList;
     private GameCallback gameCallback;
 
     public FavoriteGamesAdapter(Context context) {

@@ -63,10 +63,10 @@ public class ChatViewModel extends ViewModel {
         });
     }
 
-    public void updateGroupChat(String groupID,ArrayList<ChatMessage> chatMessages){
+    public void updateGroupChat(String groupID,ChatMessage chatMessage,String index){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
-        databaseReference.child(groupID).child(Constants.DB_CHAT).setValue(chatMessages);
+        databaseReference.child(groupID).child(Constants.DB_CHAT).child(index).setValue(chatMessage);
     }
 
     public void updateUser(){
@@ -75,7 +75,40 @@ public class ChatViewModel extends ViewModel {
         databaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
     }
 
+    public ArrayList<ChatMessage> getMessagesFromDB(String groupID){
+        ArrayList<ChatMessage> chatMessages = new ArrayList<>();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = db.getReference().child(Constants.DB_GROUPS).child(groupID).child(Constants.DB_CHAT);
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                ChatMessage newMessage = snapshot.getValue(ChatMessage.class);
+                Log.d("message1",newMessage.getMessage());
+                chatMessages.add(newMessage);
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return chatMessages;
+    }
 
     public MutableLiveData<ArrayList<ChatMessage>> getChatMessages(){
         return mChatMessages;

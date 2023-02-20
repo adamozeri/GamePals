@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void createUser() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = db.getReference("UserInfo");
+        DatabaseReference databaseReference = db.getReference(Constants.DB_USERS);
         databaseReference.child(user.getUid()).setValue(User.getInstance());
 
     }

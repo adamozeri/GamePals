@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,6 @@ public class FavoriteGamesFragment extends Fragment {
     private FragmentFavoriteGamesBinding binding;
     private FavoriteGamesAdapter favoriteGamesAdapter;
     private FavoriteGamesViewModel favoriteGamesViewModel;
-
     private ArrayList<Game> fullGamesList;
 
     private Observer<ArrayList<Game>> observer = new Observer<ArrayList<Game>>() {
@@ -96,7 +96,7 @@ public class FavoriteGamesFragment extends Fragment {
         ArrayList<Game> filteredList = new ArrayList<>();
 
         for (Game game: fullGamesList) {
-            if(game.getName().toLowerCase().startsWith(text.toLowerCase())){
+            if(game.getName().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(game);
             }
         }

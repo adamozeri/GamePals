@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 public class ChatMessage implements Parcelable{
     private String senderID;
+    private String senderName;
     private String groupID;
     private String message;
     private String dateTime;
@@ -15,8 +16,9 @@ public class ChatMessage implements Parcelable{
     public ChatMessage() {
     }
 
-    public ChatMessage(String senderID, String groupID, String message, String dateTime) {
+    public ChatMessage(String senderID, String senderName,String groupID, String message, String dateTime) {
         this.senderID = senderID;
+        this.senderName = senderName;
         this.groupID = groupID;
         this.message = message;
         this.dateTime = dateTime;
@@ -47,6 +49,14 @@ public class ChatMessage implements Parcelable{
 
     public void setSenderID(String senderID) {
         this.senderID = senderID;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 
     public String getGroupID() {

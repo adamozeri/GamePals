@@ -17,9 +17,11 @@ import com.example.gamepals.model.ChatMessage;
 import com.example.gamepals.model.Group;
 import com.example.gamepals.model.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 
 public class ChatActivity extends AppCompatActivity {
@@ -28,6 +30,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private String groupID;
     private ChatAdapter chatAdapter;
+
+    private ChatViewModel chatViewModel;
 
     private Observer<ArrayList<ChatMessage>> observer = new Observer<ArrayList<ChatMessage>>(){
 
@@ -49,11 +53,12 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        ChatViewModel chatViewModel = new ChatViewModel(groupID);
+        chatViewModel = new ChatViewModel(groupID);
         chatViewModel.getChatMessages().observe(this,observer);
         chatAdapter = new ChatAdapter();
         binding.chatLSTChatLst.setLayoutManager(new LinearLayoutManager(this));
         binding.chatLSTChatLst.setAdapter(chatAdapter);
+        User.getInstance().getGroups().get(groupID).setChatMessages(chatViewModel.getMessagesFromDB(groupID));
     }
 
 
@@ -63,20 +68,25 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void sendMessage() {
-        ChatMessage chatMessage = new ChatMessage(User.getInstance().getUid(),
-                groupID,
-                binding.chatETMsgInput.getText().toString(),
-                new Date().toString());
-        ArrayList<ChatMessage> chatMessages = User.getInstance().getGroups().get(groupID).getChatMessages();
-        if(chatMessages == null)
-            chatMessages = new ArrayList<>();
-        chatMessages.add(chatMessage);
-        User.getInstance().getGroups().get(groupID).setChatMessages(chatMessages);
-        ChatViewModel chatViewModel = new ChatViewModel(groupID); // updating DB
-        chatViewModel.updateGroupChat(groupID,chatMessages);
-        chatViewModel.updateUser();
+        String msg = binding.chatETMsgInput.getText().toString();
+        if(!msg.isEmpty()){
+            ChatMessage chatMessage = new ChatMessage(User.getInstance().getUid(),
+                    User.getInstance().getName(),
+                    groupID,
+                    msg,
+                    getReadableDateTime(new Date()));
+
+            User.getInstance().getGroups().get(groupID).getChatMessages().add(chatMessage);
+            chatViewModel.updateGroupChat(groupID,chatMessage,chatAdapter.getChatMessages().size()+"");
+            chatViewModel.updateUser();
+        }
         binding.chatETMsgInput.setText(null);
     }
+
+    private String getReadableDateTime(Date date){
+        return new SimpleDateFormat("dd MMMM, yyyy - hh:mm a", Locale.getDefault()).format(date);
+    }
+
 
 
     /**

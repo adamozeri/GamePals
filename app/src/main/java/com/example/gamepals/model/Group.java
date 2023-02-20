@@ -142,7 +142,12 @@ public class Group {
         this.chatMessages = chatMessages;
     }
 
-
+    public void addChatMessage(ChatMessage chatMessage){
+        if(chatMessages == null){
+            chatMessages = new ArrayList<>();
+        }
+        chatMessages.add(chatMessage);
+    }
 
     @Override
     public String toString() {
