@@ -21,6 +21,7 @@
     <string name="join">Join</string>
     <string name="type_a_message">Type a message</string>
     <string name="favorite_games">Favorite Games</string>
+    <string name="search_a_game">Search a game</string>
 
     <string-array name="Region">
         <item>Any</item>
@@ -43,6 +44,4 @@
         <item>Playstation</item>
         <item>Xbox</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

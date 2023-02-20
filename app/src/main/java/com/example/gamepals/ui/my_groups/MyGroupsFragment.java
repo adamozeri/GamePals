@@ -2,7 +2,6 @@ package com.example.gamepals.ui.my_groups;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.gamepals.ui.chat.ChatActivity;
 import com.example.gamepals.GroupCallback;
-import com.example.gamepals.Adapters.GroupRecyclerAdapter;
+import com.example.gamepals.Adapters.GroupAdapter;
 import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.databinding.FragmentMyGroupsBinding;
 import com.example.gamepals.model.Group;
@@ -26,7 +25,7 @@ public class MyGroupsFragment extends Fragment {
 
     private FragmentMyGroupsBinding binding;
 
-    private GroupRecyclerAdapter groupAdapter;
+    private GroupAdapter groupAdapter;
 
     private Observer<HashMap<String, Group>> observer = new Observer<HashMap<String, Group>>() {
         @Override
@@ -51,7 +50,7 @@ public class MyGroupsFragment extends Fragment {
         MyGroupsViewModel myGroupsViewModel = new MyGroupsViewModel();
         myGroupsViewModel.getGroups().observe(getViewLifecycleOwner(), observer);
 
-        groupAdapter = new GroupRecyclerAdapter(this);
+        groupAdapter = new GroupAdapter(this);
         binding.myGroupsGroups.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.myGroupsGroups.setAdapter(groupAdapter);
     }
@@ -71,7 +70,9 @@ public class MyGroupsFragment extends Fragment {
 
     private void loadChatActivity(Group group) {
         Intent intent = new Intent(getContext(), ChatActivity.class);
-        intent.putExtra(Constants.KEY_GROUP, group);
+        intent.putExtra(Constants.KEY_CHAT, group.getChatMessages());
+        intent.putExtra(Constants.KEY_GROUP_NAME, group.getName());
+        intent.putExtra(Constants.KEY_GROUP_ID,group.getId());
         startActivity(intent);
     }
 

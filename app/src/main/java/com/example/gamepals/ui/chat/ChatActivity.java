@@ -26,7 +26,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private ActivityChatBinding binding;
 
-    private Group group;
+    private String groupID;
     private ChatAdapter chatAdapter;
 
     private Observer<ArrayList<ChatMessage>> observer = new Observer<ArrayList<ChatMessage>>(){
@@ -49,7 +49,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        ChatViewModel chatViewModel = new ChatViewModel(group.getId());
+        ChatViewModel chatViewModel = new ChatViewModel(groupID);
         chatViewModel.getChatMessages().observe(this,observer);
         chatAdapter = new ChatAdapter();
         binding.chatLSTChatLst.setLayoutManager(new LinearLayoutManager(this));
@@ -64,19 +64,29 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessage() {
         ChatMessage chatMessage = new ChatMessage(User.getInstance().getUid(),
-                group.getId(),
+                groupID,
                 binding.chatETMsgInput.getText().toString(),
                 new Date().toString());
-        group.getChatMessages().add(chatMessage);
-        ChatViewModel chatViewModel = new ChatViewModel(group); // updating DB
+        ArrayList<ChatMessage> chatMessages = User.getInstance().getGroups().get(groupID).getChatMessages();
+        if(chatMessages == null)
+            chatMessages = new ArrayList<>();
+        chatMessages.add(chatMessage);
+        User.getInstance().getGroups().get(groupID).setChatMessages(chatMessages);
+        ChatViewModel chatViewModel = new ChatViewModel(groupID); // updating DB
+        chatViewModel.updateGroupChat(groupID,chatMessages);
+        chatViewModel.updateUser();
         binding.chatETMsgInput.setText(null);
     }
 
+
+    /**
+     * Loading group chat's name for title and id for updating DB
+     **/
     private void loadReceivedDetails() {
         Intent previousIntent = getIntent();
-        Group group = previousIntent.getExtras().getParcelable(Constants.KEY_GROUP);
-        Log.d("Group check:",group.toString());
-        binding.chatTVGroupName.setText(group.getName());
+        groupID = previousIntent.getStringExtra(Constants.KEY_GROUP_ID);
+        String groupName = previousIntent.getStringExtra(Constants.KEY_GROUP_NAME);
+        binding.chatTVGroupName.setText(groupName);
     }
 
     @Override

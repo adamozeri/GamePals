@@ -1,5 +1,7 @@
 package com.example.gamepals.ui.chat;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
@@ -8,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.model.ChatMessage;
 import com.example.gamepals.model.Group;
+import com.example.gamepals.model.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -60,13 +63,18 @@ public class ChatViewModel extends ViewModel {
         });
     }
 
-    public ChatViewModel(Group group) {
-        this();
+    public void updateGroupChat(String groupID,ArrayList<ChatMessage> chatMessages){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-
         DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
-        databaseReference.child(group.getId()).child(Constants.DB_CHAT).setValue(group.getChatMessages());
+        databaseReference.child(groupID).child(Constants.DB_CHAT).setValue(chatMessages);
     }
+
+    public void updateUser(){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = db.getReference(Constants.DB_USERS);
+        databaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
+    }
+
 
 
     public MutableLiveData<ArrayList<ChatMessage>> getChatMessages(){

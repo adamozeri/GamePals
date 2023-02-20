@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.favorites_games.FavoriteGamesFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -16,12 +15,31 @@
         android:textSize="24sp"
         android:textStyle="bold"
         />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/fav_ET_search"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/fav_LBL_title"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/search_a_game"
+        android:drawableStart="@drawable/ic_search"
+        android:textColorHint="#A6FFFFFF"
+        android:textColor="#DAFFFFFF"
+        android:background="@drawable/background_chat_input"
+        android:textSize="16sp"
+        android:maxLines="1" />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fav_GRID_games"
+        android:id="@+id/fav_LST_games"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:layout_below="@+id/fav_LBL_title"
+        android:layout_below="@+id/fav_ET_search"
         tools:listitem="@layout/game_item" />
 
 </RelativeLayout>

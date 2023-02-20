@@ -19,19 +19,19 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GroupRecyclerAdapter extends RecyclerView.Adapter<GroupRecyclerAdapter.GroupViewHolder> {
+public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
 
     private Fragment fragment;
     private HashMap<String, Group> groups;
     private GroupCallback groupCallback;
 
 
-    public GroupRecyclerAdapter(Fragment fragment) {
+    public GroupAdapter(Fragment fragment) {
         this.groups = new HashMap<>();
         this.fragment = fragment;
     }
 
-    public GroupRecyclerAdapter setGroupCallback(GroupCallback groupCallback) {
+    public GroupAdapter setGroupCallback(GroupCallback groupCallback) {
         this.groupCallback = groupCallback;
         return this;
     }

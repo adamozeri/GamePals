@@ -24,9 +24,7 @@ public class CreateAGroupViewModel extends ViewModel {
     /**
      * updating firebase: groups, admins' group
      **/
-    public CreateAGroupViewModel(Group newGroup) {
-        this();
-
+    public void updateGroupDB(Group newGroup){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
@@ -35,4 +33,5 @@ public class CreateAGroupViewModel extends ViewModel {
         DatabaseReference userDatabaseReference = db.getReference(Constants.DB_USERS);
         userDatabaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
     }
+
 }

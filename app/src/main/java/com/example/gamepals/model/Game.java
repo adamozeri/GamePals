@@ -5,6 +5,9 @@ public class Game {
     private String name;
     private String image;
 
+    public Game() {
+    }
+
     public Game(String name, String image) {
         this.name = name;
         this.image = image;
@@ -25,5 +28,13 @@ public class Game {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

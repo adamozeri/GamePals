@@ -62,8 +62,8 @@ public class HomeViewModel extends ViewModel {
 
     }
 
-    public HomeViewModel(Group group) {
-        this();
+
+    public void updateJoinedGroupDB(Group group){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);

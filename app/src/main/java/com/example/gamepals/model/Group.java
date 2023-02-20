@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
 
-public class Group implements Parcelable {
+public class Group {
 
     private ArrayList<String> usersID;
     private ArrayList<ChatMessage> chatMessages;
@@ -44,49 +44,6 @@ public class Group implements Parcelable {
         this.chatMessages = new ArrayList<>();
     }
 
-    protected Group(Parcel in) {
-        usersID = in.createStringArrayList();
-        chatMessages = in.createTypedArrayList(ChatMessage.CREATOR);
-        id = in.readString();
-        name = in.readString();
-        capacity = in.readInt();
-        numOfUsers = in.readInt();
-        description = in.readString();
-        region = in.readString();
-        skill = in.readString();
-        gamingPlatform = in.readString();
-        groupAdmin = in.readString();
-    }
-
-    public static final Creator<Group> CREATOR = new Creator<Group>() {
-        @Override
-        public Group createFromParcel(Parcel in) {
-            return new Group(in);
-        }
-
-        @Override
-        public Group[] newArray(int size) {
-            return new Group[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(id);
-        parcel.writeString(name);
-        parcel.writeInt(capacity);
-        parcel.writeInt(numOfUsers);
-        parcel.writeString(description);
-        parcel.writeString(region);
-        parcel.writeStringList(usersID);
-        parcel.writeTypedList(chatMessages);
-    }
 
     public void addUser(User user) {
         usersID.add(user.getUid());

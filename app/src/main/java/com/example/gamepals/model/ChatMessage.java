@@ -12,6 +12,9 @@ public class ChatMessage implements Parcelable{
     private String message;
     private String dateTime;
 
+    public ChatMessage() {
+    }
+
     public ChatMessage(String senderID, String groupID, String message, String dateTime) {
         this.senderID = senderID;
         this.groupID = groupID;

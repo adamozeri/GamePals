@@ -56,6 +56,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return chatMessages.size();
     }
 
+
     @Override
     public int getItemViewType(int position) {
         if (chatMessages.get(position).getSenderID().equals(User.getInstance().getUid()))
@@ -93,9 +94,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.binding = receivedMessageItemBinding;
         }
 
-        void setData(ChatMessage chatMessage) {
+        private void setData(ChatMessage chatMessage) {
             binding.receivedMessage.setText(chatMessage.getMessage());
-            binding.receivedDateTime.setText(chatMessage.getDateTime().toString());
+            binding.receivedDateTime.setText(chatMessage.getDateTime());
         }
     }
 }

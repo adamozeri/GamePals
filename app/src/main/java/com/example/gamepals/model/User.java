@@ -10,7 +10,7 @@ public class User {
     private String uid;
     private HashMap<String,Group> groups;
 
-    private ArrayList<Game> favoriteGames;
+    private ArrayList<String> favoriteGames;
 
     public User() {
         this.groups = new HashMap<>();
@@ -32,7 +32,11 @@ public class User {
         this.name = currentUser.getName();
         this.uid = currentUser.getUid();
         this.groups = currentUser.getGroups();
+        if(groups == null)
+            groups = new HashMap<>();
         this.favoriteGames = currentUser.getFavoriteGames();
+        if(favoriteGames == null)
+            favoriteGames = new ArrayList<>();
     }
     public static User getInstance(){
         return user;
@@ -66,14 +70,21 @@ public class User {
         this.groups = groups;
     }
 
-    public ArrayList<Game> getFavoriteGames() {
+    public ArrayList<String> getFavoriteGames() {
         return favoriteGames;
     }
 
-    public void setFavoriteGames(ArrayList<Game> favoriteGames) {
+    public void setFavoriteGames(ArrayList<String> favoriteGames) {
         this.favoriteGames = favoriteGames;
     }
 
+    public boolean checkFavGame(String game){
+        for (int i = 0; i < favoriteGames.size(); i++) {
+            if(favoriteGames.get(i).equals(game))
+                return true;
+        }
+        return false;
+    }
     @Override
     public String toString() {
         return "User{" +

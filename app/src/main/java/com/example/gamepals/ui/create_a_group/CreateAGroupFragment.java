@@ -39,7 +39,8 @@ public class CreateAGroupFragment extends Fragment {
         int capacity = Integer.parseInt(String.valueOf(binding.createTFCapacity.getText()));
         Group newGroup = new Group(name,capacity,description,region,skill,platform);
         User.getInstance().getGroups().put(newGroup.getId(),newGroup); // adding the group to the user's list
-        CreateAGroupViewModel createAGroupViewModel = new CreateAGroupViewModel(newGroup); // updating db
+        CreateAGroupViewModel createAGroupViewModel = new CreateAGroupViewModel();
+        createAGroupViewModel.updateGroupDB(newGroup);// updating db
     }
     @Override
     public void onDestroyView() {
