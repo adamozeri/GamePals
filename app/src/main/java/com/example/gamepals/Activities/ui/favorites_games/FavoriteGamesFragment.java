@@ -1,4 +1,4 @@
-package com.example.gamepals.ui.favorites_games;
+package com.example.gamepals.Activities.ui.favorites_games;
 
 import android.os.Bundle;
 
@@ -14,10 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gamepals.Adapters.GamesAdapter;
-import com.example.gamepals.GameCallback;
+import com.example.gamepals.Callbacks.GameCallback;
 import com.example.gamepals.databinding.FragmentFavoriteGamesBinding;
-import com.example.gamepals.model.Game;
-import com.example.gamepals.model.User;
+import com.example.gamepals.Models.Game;
+import com.example.gamepals.Models.User;
 
 import java.util.ArrayList;
 

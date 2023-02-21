@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.favorites_games.FavoriteGamesFragment">
+    tools:context=".Activities.ui.favorites_games.FavoriteGamesFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/fav_LBL_title"

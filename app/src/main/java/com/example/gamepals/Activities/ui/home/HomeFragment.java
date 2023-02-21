@@ -1,4 +1,4 @@
-package com.example.gamepals.ui.home;
+package com.example.gamepals.Activities.ui.home;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,13 +14,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.gamepals.GroupCallback;
+import com.example.gamepals.Callbacks.GroupCallback;
 import com.example.gamepals.Adapters.GroupAdapter;
-import com.example.gamepals.MainActivity;
+import com.example.gamepals.Activities.MainActivity;
 import com.example.gamepals.Utils.SignalSingleton;
 import com.example.gamepals.databinding.FragmentHomeBinding;
-import com.example.gamepals.model.Group;
-import com.example.gamepals.model.User;
+import com.example.gamepals.Models.Group;
+import com.example.gamepals.Models.User;
 
 import java.util.HashMap;
 

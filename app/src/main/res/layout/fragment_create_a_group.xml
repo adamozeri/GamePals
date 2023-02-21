@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.create_a_group.CreateAGroupFragment">
+    tools:context=".Activities.ui.create_a_group.CreateAGroupFragment">
 
     <ScrollView
         android:layout_width="match_parent"

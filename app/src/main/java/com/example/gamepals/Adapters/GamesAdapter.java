@@ -11,12 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.gamepals.GameCallback;
+import com.example.gamepals.Callbacks.GameCallback;
 import com.example.gamepals.R;
-import com.example.gamepals.Utils.Constants;
-import com.example.gamepals.model.Game;
-import com.example.gamepals.model.User;
-import com.example.gamepals.ui.favorites_games.FavoriteGamesFragment;
+import com.example.gamepals.Models.Game;
+import com.example.gamepals.Models.User;
+import com.example.gamepals.Activities.ui.favorites_games.FavoriteGamesFragment;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 

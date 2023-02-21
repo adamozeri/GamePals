@@ -1,4 +1,4 @@
-package com.example.gamepals.ui.create_a_group;
+package com.example.gamepals.Activities.ui.create_a_group;
 
 import android.app.Dialog;
 import android.graphics.Color;
@@ -19,13 +19,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gamepals.Adapters.GamesAdapter;
-import com.example.gamepals.GameCallback;
+import com.example.gamepals.Callbacks.GameCallback;
 import com.example.gamepals.R;
 import com.example.gamepals.Utils.SignalSingleton;
 import com.example.gamepals.databinding.FragmentCreateAGroupBinding;
-import com.example.gamepals.model.Game;
-import com.example.gamepals.model.Group;
-import com.example.gamepals.model.User;
+import com.example.gamepals.Models.Game;
+import com.example.gamepals.Models.Group;
+import com.example.gamepals.Models.User;
 
 import java.util.ArrayList;
 

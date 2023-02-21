@@ -1,4 +1,4 @@
-package com.example.gamepals.ui.my_groups;
+package com.example.gamepals.Activities.ui.my_groups;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +14,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.gamepals.model.User;
-import com.example.gamepals.ui.chat.ChatActivity;
-import com.example.gamepals.GroupCallback;
+import com.example.gamepals.Models.User;
+import com.example.gamepals.Activities.ui.chat.ChatActivity;
+import com.example.gamepals.Callbacks.GroupCallback;
 import com.example.gamepals.Adapters.GroupAdapter;
 import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.databinding.FragmentMyGroupsBinding;
-import com.example.gamepals.model.Group;
+import com.example.gamepals.Models.Group;
 
 import java.util.HashMap;
 

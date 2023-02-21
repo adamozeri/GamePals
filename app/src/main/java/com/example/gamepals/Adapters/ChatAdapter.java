@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.databinding.ReceivedMessageItemBinding;
 import com.example.gamepals.databinding.SentMessageItemBinding;
-import com.example.gamepals.model.ChatMessage;
-import com.example.gamepals.model.User;
+import com.example.gamepals.Models.ChatMessage;
+import com.example.gamepals.Models.User;
 
 import java.util.ArrayList;
 

@@ -1,26 +1,21 @@
-package com.example.gamepals.ui.chat;
+package com.example.gamepals.Activities.ui.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.gamepals.Adapters.ChatAdapter;
-import com.example.gamepals.R;
 import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.databinding.ActivityChatBinding;
-import com.example.gamepals.model.ChatMessage;
-import com.example.gamepals.model.Group;
-import com.example.gamepals.model.User;
+import com.example.gamepals.Models.ChatMessage;
+import com.example.gamepals.Models.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
 

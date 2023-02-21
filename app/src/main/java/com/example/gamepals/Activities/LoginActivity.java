@@ -1,4 +1,4 @@
-package com.example.gamepals;
+package com.example.gamepals.Activities;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.example.gamepals.R;
 import com.example.gamepals.Utils.Constants;
-import com.example.gamepals.model.User;
+import com.example.gamepals.Models.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;

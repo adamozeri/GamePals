@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.gamepals.GroupCallback;
+import com.example.gamepals.Callbacks.GroupCallback;
 import com.example.gamepals.R;
-import com.example.gamepals.model.Group;
-import com.example.gamepals.model.User;
-import com.example.gamepals.ui.my_groups.MyGroupsFragment;
+import com.example.gamepals.Models.Group;
+import com.example.gamepals.Models.User;
+import com.example.gamepals.Activities.ui.my_groups.MyGroupsFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;

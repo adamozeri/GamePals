@@ -1,4 +1,4 @@
-package com.example.gamepals.ui.my_groups;
+package com.example.gamepals.Activities.ui.my_groups;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.gamepals.Utils.Constants;
-import com.example.gamepals.model.Group;
-import com.example.gamepals.model.User;
+import com.example.gamepals.Models.Group;
+import com.example.gamepals.Models.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

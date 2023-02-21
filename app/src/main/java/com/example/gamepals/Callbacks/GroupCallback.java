@@ -1,6 +1,6 @@
-package com.example.gamepals;
+package com.example.gamepals.Callbacks;
 
-import com.example.gamepals.model.Group;
+import com.example.gamepals.Models.Group;
 
 public interface GroupCallback {
     void joinClicked(Group group, int position);

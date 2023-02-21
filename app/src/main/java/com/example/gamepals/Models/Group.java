@@ -1,14 +1,6 @@
-package com.example.gamepals.model;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
+package com.example.gamepals.Models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.UUID;
 
 public class Group {

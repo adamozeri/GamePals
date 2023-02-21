@@ -1,4 +1,4 @@
-package com.example.gamepals;
+package com.example.gamepals.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.gamepals.R;
 
 public class SplashActivity extends AppCompatActivity {
     private LottieAnimationView lottieAnimationView;

@@ -1,4 +1,4 @@
-package com.example.gamepals.model;
+package com.example.gamepals.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
