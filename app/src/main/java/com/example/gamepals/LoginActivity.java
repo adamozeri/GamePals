@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .setIsSmartLockEnabled(false)
+                .setLogo(R.drawable.ic_app)
                 .build();
         signInLauncher.launch(signInIntent);
     }

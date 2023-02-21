@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.GamePals" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/bright_main400</item>
+        <item name="colorPrimary">#25345A</item>
         <item name="colorPrimaryVariant">@color/dark_main</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/bright_main200</item>
-        <item name="colorSecondaryVariant">@color/bright_main400</item>
+        <item name="colorSecondary">@color/dark_main</item>
+        <item name="colorSecondaryVariant">@color/white</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/blue_main</item>

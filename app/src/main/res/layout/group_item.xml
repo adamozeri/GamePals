@@ -160,7 +160,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:text="@string/join"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:backgroundTint="@color/bright_main400"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/group_BTN_leave"
@@ -170,7 +171,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:text="@string/leave"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:backgroundTint="@color/bright_main400"/>
 
 
     </RelativeLayout>
