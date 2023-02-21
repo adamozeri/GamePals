@@ -17,8 +17,7 @@ public class Group {
     private ArrayList<ChatMessage> chatMessages;
     private String id;
     private String name;
-
-    private String gameName;
+    private Game game;
     private int capacity;
     private int numOfUsers;
     private String description;
@@ -30,10 +29,10 @@ public class Group {
     public Group() {
     }
 
-    public Group(String name, int capacity, String gameName, String description, String region, String skill, String gamingPlatform) {
+    public Group(String name, int capacity, Game game, String description, String region, String skill, String gamingPlatform) {
         this.name = name;
         this.capacity = capacity;
-        this.gameName = gameName;
+        this.game = game;
         this.description = description;
         this.region = region;
         this.skill = skill;
@@ -51,12 +50,12 @@ public class Group {
         numOfUsers++;
     }
 
-    public String getGameName() {
-        return gameName;
+    public Game getGame() {
+        return game;
     }
 
-    public void setGameName(String gameName) {
-        this.gameName = gameName;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public String getRegion() {

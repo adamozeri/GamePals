@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,9 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gamepals.Adapters.GamesAdapter;
@@ -22,6 +26,8 @@ import com.example.gamepals.databinding.FragmentCreateAGroupBinding;
 import com.example.gamepals.model.Game;
 import com.example.gamepals.model.Group;
 import com.example.gamepals.model.User;
+
+import java.util.ArrayList;
 
 
 public class CreateAGroupFragment extends Fragment {
@@ -34,6 +40,16 @@ public class CreateAGroupFragment extends Fragment {
 
     private CreateAGroupViewModel createAGroupViewModel;
 
+    private Game gamePicked;
+
+    private Observer<ArrayList<Game>> observer = new Observer<ArrayList<Game>>() {
+        @Override
+        public void onChanged(ArrayList<Game> games) {
+            gamesAdapter.updateGames(games);
+        }
+    };
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,15 +57,16 @@ public class CreateAGroupFragment extends Fragment {
                 new ViewModelProvider(this).get(CreateAGroupViewModel.class);
         binding = FragmentCreateAGroupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        gamePicked = new Game();
         initViews();
+        setCallbacks();
         initListeners();
-        gamesAdapter.setFullGamesList(createAGroupViewModel.getGames());
-        gamesAdapter.updateGames(createAGroupViewModel.getGames());
         return root;
     }
 
     private void initViews(){
         createAGroupViewModel = new CreateAGroupViewModel();
+        createAGroupViewModel.getMGames().observe(getViewLifecycleOwner(),observer);
         gamesAdapter = new GamesAdapter(getContext(),this);
     }
 
@@ -65,7 +82,7 @@ public class CreateAGroupFragment extends Fragment {
                 dialog.setContentView(R.layout.searchable_spinner);
 
                 // set custom height and width
-                dialog.getWindow().setLayout(650,800);
+                dialog.getWindow().setLayout(900,1200);
 
                 // set transparent background
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -77,22 +94,23 @@ public class CreateAGroupFragment extends Fragment {
                 EditText editText=dialog.findViewById(R.id.edit_text);
                 RecyclerView listView=dialog.findViewById(R.id.select_LST_games);
 
+                listView.setLayoutManager(new LinearLayoutManager(getContext()));
                 listView.setAdapter(gamesAdapter);
-//                editText.addTextChangedListener(new TextWatcher() {
-//                    @Override
-//                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                    }
-//
-//                    @Override
-//                    public void afterTextChanged(Editable editable) {
-//                        gamesAdapter.filter(editable.toString());
-//                    }
-//                });
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        gamesAdapter.filter(editable.toString());
+                    }
+                });
                 setCallbacks();
             }
         });
@@ -107,6 +125,7 @@ public class CreateAGroupFragment extends Fragment {
             @Override
             public void itemClicked(Game game, int position) {
                 binding.createLBLGameName.setText(gamesAdapter.getItem(position).getName());
+                gamePicked = game;
                 dialog.dismiss();
             }
         });
@@ -117,6 +136,9 @@ public class CreateAGroupFragment extends Fragment {
         boolean flag = true;
         if (binding.createETName.getText().toString().isEmpty()) {
             SignalSingleton.getInstance().toast("You must enter a name");
+            flag = false;
+        } else if (binding.createLBLGameName.toString().isEmpty()) {
+            SignalSingleton.getInstance().toast("You choose a game");
             flag = false;
         } else if (binding.createTFCapacity.getText().toString().isEmpty()) {
             SignalSingleton.getInstance().toast("You must enter capacity");
@@ -129,13 +151,12 @@ public class CreateAGroupFragment extends Fragment {
 
     private void createAGroup() {
         String name = binding.createETName.getText().toString();
-        String gameName = binding.createLBLGameName.getText().toString();
         String description = binding.createTFDescription.getText().toString();
         String region = binding.createSPRegion.getSelectedItem().toString();
         String skill = binding.createSPSkill.getSelectedItem().toString();
         String platform = binding.createSPPlatform.getSelectedItem().toString();
         int capacity = Integer.parseInt(String.valueOf(binding.createTFCapacity.getText()));
-        Group newGroup = new Group(name, capacity,gameName , description, region, skill, platform);
+        Group newGroup = new Group(name, capacity,gamePicked , description, region, skill, platform);
         User.getInstance().getGroups().put(newGroup.getId(), newGroup); // adding the group to the user's list
         CreateAGroupViewModel createAGroupViewModel = new CreateAGroupViewModel();
         createAGroupViewModel.updateGroupDB(newGroup);// updating db
@@ -145,5 +166,11 @@ public class CreateAGroupFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        binding.createETName.setText(null);
     }
 }

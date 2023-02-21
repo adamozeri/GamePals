@@ -2,7 +2,8 @@ package com.example.gamepals.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,8 @@ import com.example.gamepals.GroupCallback;
 import com.example.gamepals.Adapters.GroupAdapter;
 import com.example.gamepals.SettingsActivity;
 import com.example.gamepals.databinding.FragmentHomeBinding;
-import com.example.gamepals.model.Game;
 import com.example.gamepals.model.Group;
 import com.example.gamepals.model.User;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
@@ -47,7 +45,27 @@ public class HomeFragment extends Fragment {
 
         initViews();
         setCallbacks();
+        initListeners();
         return root;
+    }
+
+    private void initListeners() {
+        binding.homeETSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                groupAdapter.filter(editable.toString());
+            }
+        });
     }
 
 //    public void oneTime(){
@@ -80,7 +98,7 @@ public class HomeFragment extends Fragment {
     private void initViews() {
         binding.homeTVHello.setText("Hello, " + User.getInstance().getName());
         homeViewModel = new HomeViewModel();
-        homeViewModel.getGroups().observe(getViewLifecycleOwner(), observer);
+        homeViewModel.getMGroups().observe(getViewLifecycleOwner(), observer);
 
         groupAdapter = new GroupAdapter(this);
         binding.homeLSTGroups.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -121,5 +139,11 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        binding.homeETSearch.setText(null);
     }
 }

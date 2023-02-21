@@ -7,12 +7,11 @@
     tools:context=".ui.chat.ChatActivity"
     android:background="#274F97">
 
-
     <View
         android:id="@+id/chat_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_content"
+        android:background="@drawable/background_chat"
         android:layout_alignBottom="@id/chat_LST_chatLst"/>
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/chat_BTN_back"
@@ -71,13 +70,10 @@
             android:layout_height="match_parent"
             android:elevation="10dp"
             app:icon="@drawable/ic_send"
-            android:layout_alignBaseline="@id/chat_ET_msgInput"
-            android:layout_toEndOf="@id/chat_ET_msgInput"
             android:layout_marginStart="10dp"
             app:iconTint="@color/white"
             android:backgroundTint="#FF14336D"
             />
     </LinearLayout>
-
 
 </RelativeLayout>

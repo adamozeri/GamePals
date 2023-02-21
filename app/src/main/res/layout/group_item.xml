@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="350dp"
-    android:layout_height="120dp"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
     app:cardBackgroundColor="@color/grey"
     app:cardCornerRadius="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="5dp"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="match_parent"
         >
 
         <RelativeLayout
@@ -18,19 +18,21 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/group_IMG_groupIMG"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/group_IMG_game"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/group_TV_groupName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/group_IMG_groupIMG"
+                android:layout_alignTop="@id/group_IMG_game"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/group_IMG_groupIMG"
+                android:layout_toEndOf="@+id/group_IMG_game"
                 android:text="Name"
                 android:textSize="18sp" />
 
@@ -40,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/group_TV_groupName"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/group_IMG_groupIMG"
+                android:layout_toEndOf="@+id/group_IMG_game"
                 android:text="Game"
                 android:textSize="14sp" />
 
@@ -50,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/group_TV_game"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/group_IMG_groupIMG"
+                android:layout_toEndOf="@+id/group_IMG_game"
                 android:text="Description"
                 android:textSize="12sp" />
 
@@ -58,7 +60,7 @@
                 android:id="@+id/group_LL_tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/group_IMG_groupIMG"
+                android:layout_below="@id/group_IMG_game"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -148,15 +150,16 @@
                 android:id="@+id/group_BTN_join"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
-                android:layout_alignTop="@id/group_IMG_groupIMG"
+                android:layout_alignTop="@id/group_IMG_game"
                 android:layout_alignEnd="@id/group_LL_tags"
                 android:text="@string/join"
                 android:textAllCaps="false" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/group_BTN_leave"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
-                android:layout_alignTop="@id/group_IMG_groupIMG"
+                android:layout_alignTop="@id/group_IMG_game"
                 android:layout_alignEnd="@id/group_LL_tags"
                 android:text="@string/leave"
                 android:textAllCaps="false" />

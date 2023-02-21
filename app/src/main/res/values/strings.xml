@@ -15,7 +15,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="name">Enter a Name</string>
     <string name="description">Description</string>
-    <string name="create">Create A group</string>
+    <string name="create">Create</string>
+    <string name="create_a_group">Create A Group</string>
     <string name="capacity">Capacity</string>
     <string name="password">Password</string>
     <string name="join">Join</string>
@@ -23,6 +24,10 @@
     <string name="type_a_message">Type a message</string>
     <string name="favorite_games">Favorite Games</string>
     <string name="search_a_game">Search a game</string>
+    <string name="your_groups">Your Groups</string>
+    <string name="gaming_plat">Gaming Platform</string>
+    <string name="game">Game</string>
+    <string name="select_a_game">Select A Game</string>
 
     <string-array name="Region">
         <item>Any</item>
@@ -44,5 +49,6 @@
         <item>PC</item>
         <item>Playstation</item>
         <item>Xbox</item>
+        <item>Nintendo Switch</item>
     </string-array>
 </resources>

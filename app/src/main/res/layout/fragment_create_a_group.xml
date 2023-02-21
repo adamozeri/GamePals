@@ -13,41 +13,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:text="@string/create"
+        android:text="@string/create_a_group"
         android:layout_centerHorizontal="true"
+
         android:textStyle="bold"/>
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/create_LBL_title">
+        android:layout_below="@+id/create_LBL_title"
+        android:scrollbars="vertical">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_ET_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:hint="@string/name"
-            android:textAlignment="center"
             android:textColorHint="@color/grey"
-            android:textStyle="bold" />
+            android:maxLength="15"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@android:drawable/editbox_background"/>
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Game"
+            android:text="@string/game"
             android:layout_marginTop="10dp"/>
         <!-- text view to show the selected item-->
         <TextView
             android:id="@+id/create_LBL_gameName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Select A Game"
+            android:hint="@string/select_a_game"
             android:padding="12dp"
             android:gravity="center_vertical"
-            android:drawableEnd="@drawable/ic_arrow"
             android:background="@android:drawable/editbox_background"
+            app:drawableEndCompat="@drawable/ic_arrow"
             />
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -57,9 +61,10 @@
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/create_SP_region"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:entries="@array/Region"
             android:dropDownWidth="250dp"
+            android:padding="12dp"
             />
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -69,22 +74,23 @@
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/create_SP_skill"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:entries="@array/Skill"
             android:dropDownWidth="250dp"
+            android:padding="12dp"
             />
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gaming Platform"
+            android:text="@string/gaming_plat"
             android:layout_marginTop="10dp"/>
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/create_SP_platform"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:entries="@array/Platform"
             android:dropDownWidth="250dp"
-            android:backgroundTintMode="multiply"
+            android:padding="12dp"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,11 +104,13 @@
                 android:textColor="@color/black"/>
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_TF_capacity"
-                android:layout_width="40dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:inputType="numberDecimal"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:maxLength="2"
+                android:textAlignment="center"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -132,8 +140,9 @@
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:icon="@drawable/ic_launcher_foreground"
             app:iconSize="60dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             app:iconGravity="textStart" />
 
     </LinearLayout>

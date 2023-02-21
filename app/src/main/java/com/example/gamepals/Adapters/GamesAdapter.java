@@ -13,24 +13,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.gamepals.GameCallback;
 import com.example.gamepals.R;
+import com.example.gamepals.Utils.Constants;
 import com.example.gamepals.model.Game;
 import com.example.gamepals.model.User;
+import com.example.gamepals.ui.favorites_games.FavoriteGamesFragment;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 
-public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.FavGameViewHolder> {
+public class GamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private Fragment fragment;
     private ArrayList<Game> games;
+    private ArrayList<Game> fullGamesList;
     private GameCallback gameCallback;
 
-    private ArrayList<Game> fullGamesList;
 
-
-    public GamesAdapter(Context context,Fragment fragment) {
+    public GamesAdapter(Context context, Fragment fragment) {
         this.context = context;
         this.fragment = fragment;
         this.games = new ArrayList<>();
@@ -44,21 +45,23 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.FavGameViewH
 
     @NonNull
     @Override
-    public FavGameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_item, parent, false);
-        return new FavGameViewHolder(view);
+        if (fragment instanceof FavoriteGamesFragment)
+            return new FavGameViewHolder(view);
+        else
+            return new GameSelectViewHolder(view);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull FavGameViewHolder holder, int position) {
-        Game game = getItem(position);
-        holder.game_title.setText(game.getName());
-        Glide.with(context).load(game.getImage()).into(holder.game_IMG);
-        if(User.getInstance().checkFavGame(getItem(position).getName()))
-            holder.game_BTN_favorite.setImageResource(R.drawable.ic_star_full);
-        else
-            holder.game_BTN_favorite.setImageResource(R.drawable.ic_star_empty);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (fragment instanceof FavoriteGamesFragment) {
+            ((FavGameViewHolder) holder).setData(games.get(position));
+        } else
+            ((GameSelectViewHolder) holder).setData(games.get(position));
     }
+
 
     public Game getItem(int position) {
         return games.get(position);
@@ -69,12 +72,9 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.FavGameViewH
         return games == null ? 0 : games.size();
     }
 
-    public void setFullGamesList(ArrayList<Game> fullGamesList) {
-        this.fullGamesList = fullGamesList;
-    }
-
     public void updateGames(ArrayList<Game> games) {
         this.games = games;
+        this.fullGamesList = games;
         notifyDataSetChanged();
     }
 
@@ -83,19 +83,14 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.FavGameViewH
         notifyDataSetChanged();
     }
 
-    public void filter(String text){
+    public void filter(String text) {
         ArrayList<Game> filteredList = new ArrayList<>();
-
-        for (Game game: fullGamesList) {
-            if(game.getName().toLowerCase().contains(text.toLowerCase())){
+        for (Game game : fullGamesList) {
+            if (game.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(game);
             }
         }
         filterList(filteredList);
-    }
-
-    public ArrayList<Game> getGames() {
-        return games;
     }
 
 
@@ -118,11 +113,20 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.FavGameViewH
             game_BTN_favorite.setVisibility(View.VISIBLE);
         }
 
-        private void initListeners(){
+        private void initListeners() {
             game_BTN_favorite.setOnClickListener(view -> gameCallback.favoriteClicked(getItem(getAdapterPosition()), getAdapterPosition()));
         }
 
+        private void setData(Game game) {
+            game_title.setText(game.getName());
+            Glide.with(context).load(game.getImage()).into(game_IMG);
+            if (User.getInstance().checkFavGame(game.getName()))
+                game_BTN_favorite.setImageResource(R.drawable.ic_star_full);
+            else
+                game_BTN_favorite.setImageResource(R.drawable.ic_star_empty);
+        }
     }
+
     public class GameSelectViewHolder extends RecyclerView.ViewHolder {
 
         private MaterialTextView game_title;
@@ -142,8 +146,13 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.FavGameViewH
             game_BTN_favorite.setVisibility(View.INVISIBLE);
         }
 
-        private void initListeners(){
-            itemView.setOnClickListener(view -> gameCallback.itemClicked(getItem(getAdapterPosition()),getAdapterPosition()));
+        private void initListeners() {
+            itemView.setOnClickListener(view -> gameCallback.itemClicked(getItem(getAdapterPosition()), getAdapterPosition()));
+        }
+
+        private void setData(Game game) {
+            game_title.setText(game.getName());
+            Glide.with(context).load(game.getImage()).into(game_IMG);
         }
 
     }

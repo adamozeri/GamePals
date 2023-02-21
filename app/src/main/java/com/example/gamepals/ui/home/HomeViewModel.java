@@ -1,7 +1,5 @@
 package com.example.gamepals.ui.home;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
@@ -60,6 +58,7 @@ public class HomeViewModel extends ViewModel {
             }
         });
 
+
     }
 
 
@@ -73,7 +72,44 @@ public class HomeViewModel extends ViewModel {
         databaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
     }
 
-    public MutableLiveData<HashMap<String, Group>> getGroups() {
+    public HashMap<String, Group> getGroups(){
+        HashMap<String,Group> groups = new HashMap<>();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = db.getReference().child(Constants.DB_GROUPS);
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Group newGroup = snapshot.getValue(Group.class);
+                if(newGroup != null){
+                    if(User.getInstance().getGroups().get(newGroup.getId()) == null){
+                        groups.put(newGroup.getId(),newGroup);
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return groups;
+    }
+    public MutableLiveData<HashMap<String, Group>> getMGroups() {
         return mGroups;
     }
 }

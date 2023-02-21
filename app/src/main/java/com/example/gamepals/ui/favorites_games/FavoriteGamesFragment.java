@@ -27,7 +27,6 @@ public class FavoriteGamesFragment extends Fragment {
     private FragmentFavoriteGamesBinding binding;
     private GamesAdapter gamesAdapter;
     private FavoriteGamesViewModel favoriteGamesViewModel;
-    private ArrayList<Game> fullGamesList;
 
     private Observer<ArrayList<Game>> observer = new Observer<ArrayList<Game>>() {
         @Override
@@ -47,7 +46,6 @@ public class FavoriteGamesFragment extends Fragment {
         initViews();
         setCallbacks();
         initListeners();
-        fullGamesList = favoriteGamesViewModel.getGames();
         return root;
     }
 
@@ -60,8 +58,6 @@ public class FavoriteGamesFragment extends Fragment {
         gamesAdapter = new GamesAdapter(getContext(),this);
         binding.favLSTGames.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.favLSTGames.setAdapter(gamesAdapter);
-
-        fullGamesList = new ArrayList<>();
     }
     private void initListeners() {
 
@@ -78,20 +74,9 @@ public class FavoriteGamesFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                filter(editable.toString());
+                gamesAdapter.filter(editable.toString());
             }
         });
-    }
-
-    private void filter(String text){
-        ArrayList<Game> filteredList = new ArrayList<>();
-
-        for (Game game: fullGamesList) {
-            if(game.getName().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(game);
-            }
-        }
-        gamesAdapter.filterList(filteredList);
     }
 
     private void setCallbacks() {

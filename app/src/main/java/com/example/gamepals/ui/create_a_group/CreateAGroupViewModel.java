@@ -23,39 +23,24 @@ import java.util.UUID;
 
 public class CreateAGroupViewModel extends ViewModel {
 
-
+    private final MutableLiveData<ArrayList<Game>> mGames;
 
     public CreateAGroupViewModel() {
-    }
-
-
-    /**
-     * updating firebase: groups, admins' group
-     **/
-    public void updateGroupDB(Group newGroup){
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-
-        DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
-        databaseReference.child(newGroup.getId()).setValue(newGroup);
-
-        DatabaseReference userDatabaseReference = db.getReference(Constants.DB_USERS);
-        userDatabaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
-    }
-
-    public ArrayList<Game> getGames(){
+        mGames = new MutableLiveData<>();
         ArrayList<Game> games = new ArrayList<>();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = db.getReference().child(Constants.DB_GAMES);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Game game = snapshot.getValue(Game.class);
-                games.add(game);
+                Game newGame = snapshot.getValue(Game.class);
+                if (newGame != null) {
+                    games.add(newGame);
+                    mGames.setValue(games);
+                }
             }
-
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
             }
 
             @Override
@@ -73,7 +58,23 @@ public class CreateAGroupViewModel extends ViewModel {
 
             }
         });
-        return games;
     }
 
+
+    /**
+     * updating firebase: groups, admins' group
+     **/
+    public void updateGroupDB(Group newGroup){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+        DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
+        databaseReference.child(newGroup.getId()).setValue(newGroup);
+
+        DatabaseReference userDatabaseReference = db.getReference(Constants.DB_USERS);
+        userDatabaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
+    }
+
+    public MutableLiveData<ArrayList<Game>> getMGames() {
+        return mGames;
+    }
 }

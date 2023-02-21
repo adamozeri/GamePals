@@ -55,39 +55,6 @@ public class FavoriteGamesViewModel extends ViewModel {
         });
     }
 
-    public ArrayList<Game> getGames(){
-        ArrayList<Game> games = new ArrayList<>();
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = db.getReference().child(Constants.DB_GAMES);
-        databaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Game game = snapshot.getValue(Game.class);
-                games.add(game);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return games;
-    }
     public void updateFavGamesDB() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference userDatabaseReference = db.getReference(Constants.DB_USERS);
