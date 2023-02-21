@@ -3,7 +3,9 @@
 ## About
 
 Gampals is a social gaming app where you can meet new friends with common gaming interests and plan your gaming sessions.
+
 In the app you can create your own group or join to someone else's, you can select your favourite games and you chat with your pals!
+
 Created by Adam Ozeri.
 
 
