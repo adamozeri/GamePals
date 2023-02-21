@@ -9,4 +9,12 @@
     <color name="grey">#C1595959</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="blue_main">#788FB6</color>
+    <color name="bright_main400">#4A5569</color>
+    <color name="bright_main200">#717C8F</color>
+    <color name="dark_main">#22293B</color>
+    <color name="msgSent">#47BC2F</color>
+    <color name="msgReceived">#DA8F24</color>
+    <color name="star">#F4D562</color>
+
 </resources>

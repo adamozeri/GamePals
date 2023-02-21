@@ -19,7 +19,7 @@
             android:paddingEnd="12dp"
             android:paddingTop="12dp"
             android:textSize="13sp"
-            android:textColor="@color/teal_200"
+            android:textColor="@color/msgSent"
             android:textStyle="italic|bold"
             android:maxLines="1"/>
         <TextView

@@ -38,6 +38,9 @@ public class ChatActivity extends AppCompatActivity {
         @Override
         public void onChanged(ArrayList<ChatMessage> chatMessages) {
             chatAdapter.updateMessages(chatMessages);
+            if(chatAdapter.getItemCount() > 0){
+                binding.chatLSTChatLst.smoothScrollToPosition(chatAdapter.getItemCount()-1);
+            }
         }
     };
 

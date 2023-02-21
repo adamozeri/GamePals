@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -22,16 +23,16 @@ public class MyGroupsViewModel extends ViewModel {
 
     public MyGroupsViewModel() {
         mGroups = new MutableLiveData<>();
-        HashMap<String,Group> groups = new HashMap<>();
+        HashMap<String, Group> groups = new HashMap<>();
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = db.getReference().child(Constants.DB_GROUPS);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Group newGroup = snapshot.getValue(Group.class);
-                if(newGroup != null){
-                    if(User.getInstance().getGroups().get(newGroup.getId()) != null){
-                        groups.put(newGroup.getId(),newGroup);
+                if (newGroup != null) {
+                    if (User.getInstance().getGroups().get(newGroup.getId()) != null) {
+                        groups.put(newGroup.getId(), newGroup);
                         mGroups.setValue(groups);
                     }
                 }
@@ -39,12 +40,18 @@ public class MyGroupsViewModel extends ViewModel {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                Group newGroup = snapshot.getValue(Group.class);
+                if (newGroup != null) {
+                    if (User.getInstance().getGroups().get(newGroup.getId()) != null) {
+                        groups.put(newGroup.getId(), newGroup);
+                        mGroups.setValue(groups);
+                    }
+                }
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                snapshot.getRef().removeValue();
             }
 
             @Override
@@ -72,8 +79,17 @@ public class MyGroupsViewModel extends ViewModel {
 
     public void removeGroupFromDB(String groupID) {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS);
-        databaseReference.child(groupID).removeValue();
+        DatabaseReference databaseReference = db.getReference(Constants.DB_GROUPS).child(groupID);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                snapshot.getRef().removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     public void updateGroupDB(Group group) {

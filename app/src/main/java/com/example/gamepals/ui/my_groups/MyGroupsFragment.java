@@ -2,6 +2,8 @@ package com.example.gamepals.ui.my_groups;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +48,11 @@ public class MyGroupsFragment extends Fragment {
         View root = binding.getRoot();
         initViews();
         setCallbacks();
+        initListeners();
         return root;
     }
+
+
 
     private void initViews() {
         myGroupsViewModel = new MyGroupsViewModel();
@@ -56,6 +61,7 @@ public class MyGroupsFragment extends Fragment {
         groupAdapter = new GroupAdapter(this);
         binding.myGroupsGroups.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.myGroupsGroups.setAdapter(groupAdapter);
+
     }
 
     private void setCallbacks() {
@@ -71,17 +77,38 @@ public class MyGroupsFragment extends Fragment {
 
             @Override
             public void leaveClicked(Group group, int position) {
-                group.getUsersID().remove(User.getInstance().getUid());
+                group.removeUser(User.getInstance().getUid());
                 User.getInstance().getGroups().remove(group.getId());
+                groupAdapter.removeGroup(group.getId());
+                groupAdapter.notifyItemRemoved(position);
+                groupAdapter.notifyItemChanged(position);
                 if(group.getUsersID().isEmpty()){
+
                     myGroupsViewModel.removeGroupFromDB(group.getId());
                 }
                 else{
                     myGroupsViewModel.updateGroupDB(group);
                 }
-                groupAdapter.removeGroup(group.getId());
-                groupAdapter.notifyItemRemoved(position);
                 myGroupsViewModel.updateUserDB();
+            }
+        });
+    }
+
+    private void initListeners() {
+        binding.myGroupsETSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                groupAdapter.filterName(editable.toString(),false);
             }
         });
     }
@@ -99,5 +126,11 @@ public class MyGroupsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        binding.myGroupsETSearch.setText(null);
     }
 }

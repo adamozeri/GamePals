@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@color/blue_main">
 
     <!-- Text view to show the text Select course-->
     <TextView
@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        tools:listitem="@layout/game_item" />
+        tools:listitem="@layout/game_item"
+        android:background="@drawable/background_spinner_content"/>
 
 </LinearLayout>

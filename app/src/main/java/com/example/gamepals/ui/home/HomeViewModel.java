@@ -39,12 +39,20 @@ public class HomeViewModel extends ViewModel {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                Group newGroup = snapshot.getValue(Group.class);
+                if(newGroup != null){
+                    if(User.getInstance().getGroups().get(newGroup.getId()) == null){
+                        groups.put(newGroup.getId(),newGroup);
+                        mGroups.setValue(groups);
+                    }
+                }
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                for (DataSnapshot snap: snapshot.getChildren()) {
+                    snap.getRef().removeValue();
+                }
             }
 
             @Override
@@ -72,43 +80,6 @@ public class HomeViewModel extends ViewModel {
         databaseReference.child(User.getInstance().getUid()).setValue(User.getInstance());
     }
 
-    public HashMap<String, Group> getGroups(){
-        HashMap<String,Group> groups = new HashMap<>();
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = db.getReference().child(Constants.DB_GROUPS);
-        databaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Group newGroup = snapshot.getValue(Group.class);
-                if(newGroup != null){
-                    if(User.getInstance().getGroups().get(newGroup.getId()) == null){
-                        groups.put(newGroup.getId(),newGroup);
-                    }
-                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return groups;
-    }
     public MutableLiveData<HashMap<String, Group>> getMGroups() {
         return mGroups;
     }

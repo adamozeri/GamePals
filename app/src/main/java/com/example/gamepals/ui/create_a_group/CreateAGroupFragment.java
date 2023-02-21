@@ -137,8 +137,8 @@ public class CreateAGroupFragment extends Fragment {
         if (binding.createETName.getText().toString().isEmpty()) {
             SignalSingleton.getInstance().toast("You must enter a name");
             flag = false;
-        } else if (binding.createLBLGameName.toString().isEmpty()) {
-            SignalSingleton.getInstance().toast("You choose a game");
+        } else if (binding.createLBLGameName.getText() == "") {
+            SignalSingleton.getInstance().toast("You must choose a game");
             flag = false;
         } else if (binding.createTFCapacity.getText().toString().isEmpty()) {
             SignalSingleton.getInstance().toast("You must enter capacity");
@@ -152,14 +152,39 @@ public class CreateAGroupFragment extends Fragment {
     private void createAGroup() {
         String name = binding.createETName.getText().toString();
         String description = binding.createTFDescription.getText().toString();
-        String region = binding.createSPRegion.getSelectedItem().toString();
+        String region = getRegion();
         String skill = binding.createSPSkill.getSelectedItem().toString();
-        String platform = binding.createSPPlatform.getSelectedItem().toString();
+        String platform = getPlatform();
         int capacity = Integer.parseInt(String.valueOf(binding.createTFCapacity.getText()));
         Group newGroup = new Group(name, capacity,gamePicked , description, region, skill, platform);
         User.getInstance().getGroups().put(newGroup.getId(), newGroup); // adding the group to the user's list
         CreateAGroupViewModel createAGroupViewModel = new CreateAGroupViewModel();
         createAGroupViewModel.updateGroupDB(newGroup);// updating db
+        SignalSingleton.getInstance().toast("Group Created");
+        setValuesNull();
+    }
+
+    private void setValuesNull() {
+        binding.createETName.setText(null);
+        binding.createTFCapacity.setText(null);
+        binding.createTFDescription.setText(null);
+        binding.createLBLGameName.setText(null);
+    }
+
+    private String getPlatform(){
+        if(binding.createSPPlatform.getSelectedItem().toString().equals("Playstation"))
+            return "PS";
+        else if(binding.createSPPlatform.getSelectedItem().toString().equals("Nintendo Switch"))
+            return "NS";
+        return binding.createSPPlatform.getSelectedItem().toString();
+    }
+
+    private String getRegion(){
+        if(binding.createSPRegion.getSelectedItem().toString().equals("North America"))
+            return "NA";
+        if(binding.createSPRegion.getSelectedItem().toString().equals("South America"))
+            return "SA";
+        return binding.createSPRegion.getSelectedItem().toString();
     }
 
     @Override
@@ -171,6 +196,6 @@ public class CreateAGroupFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        binding.createETName.setText(null);
+        setValuesNull();
     }
 }

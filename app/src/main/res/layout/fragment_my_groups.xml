@@ -10,27 +10,47 @@
     <RelativeLayout
         android:id="@+id/myGroups_Relative"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/background_chat"
         >
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/myGroups_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/your_groups"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_centerInParent="true"/>
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/dark_main"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/myGroups_ET_search"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/myGroups_title"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/search_a_group"
+            android:drawableStart="@drawable/ic_search"
+            android:textColorHint="#A6FFFFFF"
+            android:textColor="#DAFFFFFF"
+            android:background="@drawable/background_textview_input"
+            android:textSize="16sp"
+            android:maxLines="1" />
     </RelativeLayout>
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/myGroups_Relative"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:background="@drawable/background_content"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        >-->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/myGroups_Relative"
+        android:background="@drawable/background_content"
+        android:layout_marginTop="20dp"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myGroups_groups"
         android:layout_width="wrap_content"
@@ -38,5 +58,7 @@
         android:layout_below="@id/myGroups_Relative"
         tools:listitem="@layout/group_item"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:paddingTop="30dp"
         />
 </RelativeLayout>

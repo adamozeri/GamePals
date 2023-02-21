@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GamePals</string>
     <string name="title_home">Home</string>
-    <string name="title_my_groups">MyGroups</string>
+    <string name="title_my_groups">Your Groups</string>
     <string name="title_create_a_group">Create A Group</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_favorite_games">Favorite Games</string>
@@ -24,10 +24,14 @@
     <string name="type_a_message">Type a message</string>
     <string name="favorite_games">Favorite Games</string>
     <string name="search_a_game">Search a game</string>
+    <string name="search_a_group">Search a group</string>
     <string name="your_groups">Your Groups</string>
     <string name="gaming_plat">Gaming Platform</string>
     <string name="game">Game</string>
     <string name="select_a_game">Select A Game</string>
+    <string name="platfrom">Platfrom</string>
+    <string name="region">Region</string>
+    <string name="europe">Europe</string>
 
     <string-array name="Region">
         <item>Any</item>

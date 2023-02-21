@@ -45,9 +45,14 @@ public class Group {
     }
 
 
-    public void addUser(User user) {
-        usersID.add(user.getUid());
+    public void addUser(String uid) {
+        usersID.add(uid);
         numOfUsers++;
+    }
+
+    public void removeUser(String uid){
+        usersID.remove(uid);
+        numOfUsers--;
     }
 
     public Game getGame() {
@@ -135,7 +140,6 @@ public class Group {
     }
 
 
-
     public ArrayList<ChatMessage> getChatMessages() {
         return chatMessages;
     }
@@ -158,6 +162,7 @@ public class Group {
                 ", chatMessages=" + chatMessages +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", game=" + game +
                 ", capacity=" + capacity +
                 ", numOfUsers=" + numOfUsers +
                 ", description='" + description + '\'' +
@@ -166,5 +171,4 @@ public class Group {
                 ", gamingPlatform='" + gamingPlatform + '\'' +
                 '}';
     }
-
 }

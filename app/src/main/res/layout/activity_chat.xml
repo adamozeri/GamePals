@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.chat.ChatActivity"
-    android:background="#274F97">
+    android:background="@color/dark_main">
 
     <View
         android:id="@+id/chat_background"
@@ -18,17 +18,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_arrow_back"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="23dp"
         android:layout_marginStart="16dp"
-        android:background="@color/transparent"/>
+        android:background="@color/transparent" />
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/chat_TV_groupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_alignBottom="@id/chat_BTN_back"/>
+        android:textSize="25sp"
+        android:layout_alignBottom="@id/chat_BTN_back"
+        android:textColor="@color/dark_main"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_LST_chatLst"
         android:layout_width="match_parent"
@@ -72,7 +73,7 @@
             app:icon="@drawable/ic_send"
             android:layout_marginStart="10dp"
             app:iconTint="@color/white"
-            android:backgroundTint="#FF14336D"
+            android:backgroundTint="@color/bright_main400"
             />
     </LinearLayout>
 

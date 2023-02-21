@@ -1,33 +1,23 @@
 package com.example.gamepals.Adapters;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.gamepals.GroupCallback;
 import com.example.gamepals.R;
-import com.example.gamepals.Utils.Constants;
-import com.example.gamepals.model.Game;
 import com.example.gamepals.model.Group;
+import com.example.gamepals.model.User;
 import com.example.gamepals.ui.my_groups.MyGroupsFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,14 +25,17 @@ import java.util.HashMap;
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
 
     private Fragment fragment;
-    private HashMap<String, Group> groups;
-    private HashMap<String, Group> fullGroupList;
+    private HashMap<String, Group> filteredGroup;
+    private HashMap<String, Group> allGroupList;
+
+
+
     private GroupCallback groupCallback;
 
 
     public GroupAdapter(Fragment fragment) {
-        this.groups = new HashMap<>();
-        this.fullGroupList = new HashMap<>();
+        this.filteredGroup = new HashMap<>();
+        this.allGroupList = new HashMap<>();
         this.fragment = fragment;
     }
 
@@ -76,35 +69,66 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     }
 
     private Group getItem(int position) {
-        ArrayList<Group> groupsValues = new ArrayList<>(groups.values());
+        ArrayList<Group> groupsValues = new ArrayList<>(filteredGroup.values());
         return groupsValues.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return groups == null ? 0 : groups.size();
+        return filteredGroup == null ? 0 : filteredGroup.size();
     }
 
     public void updateGroups(HashMap<String, Group> groups) {
-        this.groups = groups;
-        this.fullGroupList = groups;
+        this.filteredGroup = groups;
+        this.allGroupList = groups;
         notifyDataSetChanged();
     }
+
+
 
     public void removeGroup(String groupID) {
-        groups.remove(groupID);
+        filteredGroup.remove(groupID);
+        if(allGroupList.containsKey(groupID))
+            allGroupList.remove(groupID);
         notifyDataSetChanged();
     }
 
-    public void filterList(HashMap<String, Group> filterList) {
-        this.groups = filterList;
+    public void setFilteredGroup(HashMap<String, Group> filteredGroup) {
+        this.filteredGroup = filteredGroup;
+    }
+
+    public HashMap<String, Group> getAllGroupList() {
+        return allGroupList;
+    }
+
+    private void filterList(HashMap<String, Group> filterList) {
+        this.filteredGroup = filterList;
         notifyDataSetChanged();
     }
 
-    public void filter(String text) {
+
+    public void filterName(String text, boolean isChecked) {
         HashMap<String, Group> filteredList = new HashMap<>();
-        for (Group group : fullGroupList.values()) {
-            if (group.getName().toLowerCase().contains(text.toLowerCase())) {
+        if (!isChecked) {
+            for (Group group : allGroupList.values()) {
+                if (group.getName().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.put(group.getId(), group);
+                }
+            }
+        } else {
+            for (Group group : filteredGroup.values()) {
+                if (group.getName().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.put(group.getId(), group);
+                }
+            }
+        }
+        filterList(filteredList);
+    }
+
+    public void filterFav() {
+        HashMap<String, Group> filteredList = new HashMap<>();
+        for (Group group : allGroupList.values()) {
+            if (User.getInstance().checkFavGame(group.getGame().getName())) {
                 filteredList.put(group.getId(), group);
             }
         }
@@ -138,7 +162,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
                 group_BTN_leave.setVisibility(View.INVISIBLE);
             }
         }
-        private void initViews(){
+
+        private void initViews() {
             group_TV_groupName = itemView.findViewById(R.id.group_TV_groupName);
             group_TV_game = itemView.findViewById(R.id.group_TV_game);
             group_TV_groupDescription = itemView.findViewById(R.id.group_TV_groupDescription);
