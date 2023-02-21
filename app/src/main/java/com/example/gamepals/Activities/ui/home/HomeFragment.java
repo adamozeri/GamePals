@@ -136,5 +136,6 @@ public class HomeFragment extends Fragment {
     public void onPause() {
         super.onPause();
         binding.homeETSearch.setText(null);
+        binding.homeCBFavGames.setChecked(false);
     }
 }
