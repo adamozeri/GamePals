@@ -108,7 +108,7 @@ public class MyGroupsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                groupAdapter.filterName(editable.toString(),false);
+                groupAdapter.filter(false,editable.toString());
             }
         });
     }

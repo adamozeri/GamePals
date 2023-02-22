@@ -29,7 +29,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     private HashMap<String, Group> allGroupList;
 
 
-
     private GroupCallback groupCallback;
 
 
@@ -85,17 +84,13 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     }
 
 
-
     public void removeGroup(String groupID) {
         filteredGroup.remove(groupID);
-        if(allGroupList.containsKey(groupID))
+        if (allGroupList.containsKey(groupID))
             allGroupList.remove(groupID);
         notifyDataSetChanged();
     }
 
-    public void setFilteredGroup(HashMap<String, Group> filteredGroup) {
-        this.filteredGroup = filteredGroup;
-    }
 
     public HashMap<String, Group> getAllGroupList() {
         return allGroupList;
@@ -107,29 +102,18 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     }
 
 
-    public void filterName(String text, boolean isChecked) {
-        HashMap<String, Group> filteredList = new HashMap<>();
-        if (!isChecked) {
-            for (Group group : allGroupList.values()) {
-                if (group.getName().toLowerCase().contains(text.toLowerCase())) {
-                    filteredList.put(group.getId(), group);
-                }
-            }
-        } else {
-            for (Group group : filteredGroup.values()) {
-                if (group.getName().toLowerCase().contains(text.toLowerCase())) {
-                    filteredList.put(group.getId(), group);
-                }
-            }
-        }
-        filterList(filteredList);
-    }
-
-    public void filterFav() {
+    public void filter(boolean isChecked, String text) {
         HashMap<String, Group> filteredList = new HashMap<>();
         for (Group group : allGroupList.values()) {
-            if (User.getInstance().checkFavGame(group.getGame().getName())) {
-                filteredList.put(group.getId(), group);
+            if (isChecked) {
+                if (User.getInstance().checkFavGame(group.getGame().getName()) && group.getName().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.put(group.getId(), group);
+                }
+            }
+            else{
+                if (group.getName().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.put(group.getId(), group);
+                }
             }
         }
         filterList(filteredList);

@@ -64,7 +64,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                groupAdapter.filterName(editable.toString(),binding.homeCBFavGames.isChecked());
+                groupAdapter.filter(binding.homeCBFavGames.isChecked(),binding.homeETSearch.getText().toString());
+
             }
         });
 
@@ -73,14 +74,7 @@ public class HomeFragment extends Fragment {
         binding.homeCBFavGames.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(compoundButton.isChecked()){
-                    groupAdapter.filterFav();
-                }
-                else {
-                    groupAdapter.setFilteredGroup(new HashMap<>(groupAdapter.getAllGroupList()));
-                    if(binding.homeETSearch.getText().toString() != null)
-                        groupAdapter.filterName(binding.homeETSearch.getText().toString(),binding.homeCBFavGames.isChecked());
-                }
+                groupAdapter.filter(compoundButton.isChecked(),binding.homeETSearch.getText().toString());
             }
         });
     }
